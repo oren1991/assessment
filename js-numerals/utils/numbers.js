@@ -11,5 +11,25 @@ module.exports.stringifyNumber = (number) => {
         9: "nine",
     };
 
+    const tens = {
+        1: "", //handle teens separately,
+        2: "twenty",
+        3: "thirty",
+        4: "forty",
+        5: "fifty",
+        6: "sixty",
+        7: "seventy",
+        8: "eighty",
+        9: "ninety",
+    };
+
+    let numberString = number.toString();
+    switch (numberString.length) {
+        case 1:
+            return ones[number];
+        case 2:
+            return `${tens[numberString[0]]}-${ones[numberString[1]]}`;
+    }
+
     return ones[number];
 };
