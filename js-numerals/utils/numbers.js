@@ -1,5 +1,6 @@
 module.exports.stringifyNumber = (number) => {
     const ones = {
+        0: "",
         1: "one",
         2: "two",
         3: "three",
@@ -28,7 +29,10 @@ module.exports.stringifyNumber = (number) => {
         case 1:
             return ones[number];
         case 2:
-            return `${tens[numberString[0]]}-${ones[numberString[1]]}`;
+            let sepNeeded = numberString[1] !== "0";
+            return `${tens[numberString[0]]}${sepNeeded ? "-" : ""}${
+                ones[numberString[1]]
+            }`;
     }
 
     return ones[number];
