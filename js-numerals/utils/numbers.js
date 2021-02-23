@@ -25,20 +25,26 @@ module.exports.stringifyNumber = (number) => {
     };
 
     let numberString = number.toString();
+    let sepNeeded;
+    let result = "";
     switch (numberString.length) {
         case 1:
-            return ones[number];
+            result = ones[number];
+            break;
         case 2:
-            let sepNeeded = numberString[1] !== "0";
-            return `${tens[numberString[0]]}${sepNeeded ? "-" : ""}${
+            sepNeeded = numberString[1] !== "0";
+            result = `${tens[numberString[0]]}${sepNeeded ? "-" : ""}${
                 ones[numberString[1]]
             }`;
+            break;
         case 3:
             twoDigitPart = parseInt(numberString.slice(1));
-            return `${ones[numberString[0]]} hundred and ${this.stringifyNumber(
-                twoDigitPart
-            )}`;
+            let stringifiedPart = this.stringifyNumber(twoDigitPart);
+            sepNeeded = stringifiedPart.length > 0;
+            result = `${ones[numberString[0]]} hundred ${
+                sepNeeded ? "and" : ""
+            } ${stringifiedPart}`;
+            break;
     }
-
-    return ones[number];
+    return result.trim();
 };
