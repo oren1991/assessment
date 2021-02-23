@@ -6,6 +6,9 @@ describe("stringifyNumber", () => {
         expect(stringifyNumber(23)).toBe("twenty-three");
         expect(stringifyNumber(81)).toBe("eighty-one");
         expect(stringifyNumber(20)).toBe("twenty");
+        expect(stringifyNumber(221)).toBe("two hundred and twenty-one");
+        expect(stringifyNumber(201)).toBe("two hundred and one");
+        expect(stringifyNumber(200)).toBe("two hundred");
         //given tests
         expect(stringifyNumber(7)).toBe("seven");
         expect(stringifyNumber(42)).toBe("forty-two");

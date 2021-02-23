@@ -33,6 +33,11 @@ module.exports.stringifyNumber = (number) => {
             return `${tens[numberString[0]]}${sepNeeded ? "-" : ""}${
                 ones[numberString[1]]
             }`;
+        case 3:
+            twoDigitPart = parseInt(numberString.slice(1));
+            return `${ones[numberString[0]]} hundred and ${this.stringifyNumber(
+                twoDigitPart
+            )}`;
     }
 
     return ones[number];
