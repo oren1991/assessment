@@ -1,4 +1,4 @@
-const { Number } = require("./utils/numbersClass");
+import { Number } from "./utils/numbersClass";
 describe("Number class stringify", () => {
     it("should convert one digit numbers", () => {
         expect(new Number(0).stringify()).toBe("zero");
@@ -62,6 +62,14 @@ describe("Number class stringify", () => {
         expect(new Number(123411).stringify()).toBe(
             "one hundred and twenty-three thousand four hundred and eleven"
         );
+    });
+
+    it("should return too big if greater than 99999", () => {
+        expect(new Number(1000000).stringify()).toBe("Number is too big");
+    });
+
+    it("should return invalid if not number", () => {
+        expect(new Number("").stringify()).toBe("input must be a number");
     });
 
     it("should convert numbers correctly", () => {

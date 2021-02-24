@@ -1,5 +1,5 @@
-const { ONES, TEENS, TENS } = require("./constants");
-class Number {
+import { ONES, TEENS, TENS } from "./constants";
+export class Number {
     constructor(number) {
         if (typeof number !== "number") {
             this.number = null;
@@ -16,7 +16,7 @@ class Number {
             return "input must be a number";
         }
         if (this.number > 999999) {
-            return "Number too big";
+            return "Number is too big";
         }
         let params = {};
         switch (number.toString().length) {
@@ -123,5 +123,3 @@ class Number {
         return result;
     }
 }
-
-module.exports.Number = Number;

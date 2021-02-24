@@ -1,4 +1,4 @@
-module.exports.ONES = {
+export const ONES = {
     0: "",
     1: "one",
     2: "two",
@@ -11,7 +11,7 @@ module.exports.ONES = {
     9: "nine",
 };
 
-module.exports.TEENS = {
+export const TEENS = {
     10: "ten",
     11: "eleven",
     12: "twelve",
@@ -24,7 +24,7 @@ module.exports.TEENS = {
     19: "nineteen",
 };
 
-module.exports.TENS = {
+export const TENS = {
     1: "", //handle teens separately,
     2: "twenty",
     3: "thirty",
