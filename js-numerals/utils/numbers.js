@@ -72,7 +72,6 @@ module.exports.stringifyNumber = (number, recursive = false) => {
             );
             break;
         default:
-            console.log("hello");
             return "Number is too big";
     }
     result = `${firstPart} ${unit}${sepNeeded ? " and" : ""} ${secondPart}`;
