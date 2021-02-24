@@ -3,6 +3,7 @@ const { Number } = require("./utils/numbersClass");
 
 describe("stringifyNumber", () => {
     it("should convert numbers correctly", () => {
+        expect(stringifyNumber(0)).toBe("zero");
         expect(stringifyNumber(1)).toBe("one");
         expect(stringifyNumber(23)).toBe("twenty-three");
         expect(stringifyNumber(81)).toBe("eighty-one");
@@ -14,6 +15,12 @@ describe("stringifyNumber", () => {
         expect(stringifyNumber(2222)).toBe(
             "two thousand two hundred and twenty-two"
         );
+        expect(stringifyNumber(123456)).toBe(
+            "one hundred and twenty-three thousand four hundred and fifty-six"
+        );
+        expect(stringifyNumber(1000000)).toBe("Number is too big");
+        expect(stringifyNumber("hello")).toBe("input must be a number");
+        expect(stringifyNumber()).toBe("input must be a number");
         //given tests
         expect(stringifyNumber(7)).toBe("seven");
         expect(stringifyNumber(42)).toBe("forty-two");
@@ -27,6 +34,7 @@ describe("stringifyNumber", () => {
 
 describe("Number class stringify", () => {
     it("should convert numbers correctly", () => {
+        //expect(new Number(0).stringify()).toBe("zero");
         expect(new Number(1).stringify()).toBe("one");
         expect(new Number(23).stringify()).toBe("twenty-three");
         expect(new Number(81).stringify()).toBe("eighty-one");
@@ -38,6 +46,12 @@ describe("Number class stringify", () => {
         expect(new Number(2222).stringify()).toBe(
             "two thousand two hundred and twenty-two"
         );
+        expect(new Number(123456).stringify()).toBe(
+            "one hundred and twenty-three thousand four hundred and fifty-six"
+        );
+        expect(new Number(1000000).stringify()).toBe("Number too big");
+        expect(new Number("hello").stringify()).toBe("input must be a number");
+        expect(new Number().stringify()).toBe("input must be a number");
         //given tests
         expect(new Number(7).stringify()).toBe("seven");
         expect(new Number(42).stringify()).toBe("forty-two");

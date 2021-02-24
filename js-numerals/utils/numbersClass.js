@@ -1,10 +1,20 @@
 const { ONES, TEENS, TENS } = require("./constants");
 class Number {
     constructor(number) {
+        if (typeof number !== "number") {
+            this.number = null;
+            return;
+        }
         this.number = number;
     }
 
     stringify(number = this.number) {
+        if (this.number === null) {
+            return "input must be a number";
+        }
+        if (this.number > 999999) {
+            return "Number too big";
+        }
         let params = {};
         switch (number.toString().length) {
             case 1:
@@ -20,6 +30,8 @@ class Number {
             case 5:
                 params = this.handleFiveDigits(number);
                 break;
+            case 6:
+                params = this.handleSixDigits(number);
         }
         return `${params.firstPart} ${params.unit}${
             params.sepNeeded ? " and" : ""
@@ -80,6 +92,15 @@ class Number {
         result.unit = "thousand";
         result.firstPart = this.stringify(parseInt(numberString.slice(0, 2)));
         result.secondPart = this.stringify(parseInt(numberString.slice(2)));
+        return result;
+    }
+
+    handleSixDigits(number) {
+        let numberString = number.toString();
+        let result = {};
+        result.unit = "thousand";
+        result.firstPart = this.stringify(parseInt(numberString.slice(0, 3)));
+        result.secondPart = this.stringify(parseInt(numberString.slice(3)));
         return result;
     }
 }
