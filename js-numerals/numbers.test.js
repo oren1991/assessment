@@ -9,6 +9,7 @@ describe("stringifyNumber", () => {
         expect(stringifyNumber(221)).toBe("two hundred and twenty-one");
         expect(stringifyNumber(201)).toBe("two hundred and one");
         expect(stringifyNumber(200)).toBe("two hundred");
+        expect(stringifyNumber(2000)).toBe("two thousand");
         //given tests
         expect(stringifyNumber(7)).toBe("seven");
         expect(stringifyNumber(42)).toBe("forty-two");

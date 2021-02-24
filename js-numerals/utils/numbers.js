@@ -45,6 +45,21 @@ module.exports.stringifyNumber = (number) => {
                 sepNeeded ? "and" : ""
             } ${stringifiedPart}`;
             break;
+        case 4:
+            if (numberString[0] == "1" && parseInt(numberString[1]) > 0) {
+                //specialhandling TODO
+            } else {
+                let threeDigitPart = parseInt(numberString.slice(1));
+                let stringifiedPart = this.stringifyNumber(threeDigitPart);
+                console.log(stringifiedPart.length);
+                sepNeeded =
+                    stringifiedPart.length > 0 &&
+                    !stringifiedPart.includes("and");
+                console.log(stringifiedPart);
+                result = `${ones[numberString[0]]} thousand ${
+                    sepNeeded ? "and" : ""
+                } ${stringifiedPart}`;
+            }
     }
     return result.trim();
 };
