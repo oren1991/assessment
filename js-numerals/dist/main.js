@@ -1,1 +1,115 @@
-(()=>{"use strict";const e={0:"",1:"one",2:"two",3:"three",4:"four",5:"five",6:"six",7:"seven",8:"eight",9:"nine"},t={10:"ten",11:"eleven",12:"twelve",13:"thirteen",14:"fourteen",15:"fifteen",16:"sixteen",17:"seventeen",18:"eighteen",19:"nineteen"},n={1:"",2:"twenty",3:"thirty",4:"forty",5:"fifty",6:"sixty",7:"seventy",8:"eighty",9:"ninety"},i=(s,r=!1)=>{if("number"!=typeof s)return"input must be a number";if(0==s&&!r)return"zero";let a,l,u,h,c=s.toString(),d="";switch(c.length){case 1:return e[s];case 2:return"1"==c[0]?d=t[s]:(a="0"!==c[1],d=`${n[c[0]]}${a?"-":""}${e[c[1]]}`),d;case 3:l=e[c[0]],u=i(parseInt(c.slice(1)),!0),a=u.length>0,h="hundred";break;case 4:if("1"==c[0]&&parseInt(c[1])>0)h="hundred",l=i(parseInt(c.slice(0,2)),!0),u=i(parseInt(c.slice(2)),!0);else{h="thousand";let t=parseInt(c.slice(1));l=e[c[0]],u=i(t,!0)}a=u.length>0&&!u.includes("and");break;case 5:h="thousand",l=i(parseInt(c.slice(0,2)),!0),u=i(parseInt(c.slice(2)),!0);break;case 6:h="thousand",l=i(parseInt(c.slice(0,3)),!0),u=i(parseInt(c.slice(3)),!0);break;default:return"Number is too big"}return d=`${l} ${h}${a?" and":""} ${u}`,d.trim()};console.log(i(123)),console.log(new class{constructor(e){this.number="number"==typeof e?e:null}stringify(e=this.number,t=!1){if(0==this.number&&0==t)return"zero";if(null===this.number)return"input must be a number";if(this.number>999999)return"Number is too big";let n={};switch(e.toString().length){case 1:return this.handleOneDigit(e);case 2:return this.handleTwoDigits(e);case 3:n=this.handleThreeDigits(e);break;case 4:n=this.handleFourDigits(e);break;case 5:n=this.handleFiveDigits(e);break;case 6:n=this.handleSixDigits(e)}return`${n.firstPart} ${n.unit}${n.sepNeeded?" and":""} ${n.secondPart}`.trim()}handleOneDigit(t){return e[t]}handleTwoDigits(i){let s,r=i.toString();if("1"==r[0])s=t[i];else{let t="0"!==r[1];s=`${n[r[0]]}${t?"-":""}${e[r[1]]}`}return s}handleThreeDigits(t){let n=t.toString(),i={};return i.firstPart=e[n[0]],i.secondPart=this.stringify(parseInt(n.slice(1)),!0),i.sepNeeded=i.secondPart.length>0,i.unit="hundred",i}handleFourDigits(t){let n=t.toString(),i={};if("1"==n[0]&&parseInt(n[1])>0)i.unit="hundred",i.firstPart=this.stringify(parseInt(n.slice(0,2)),!0),i.secondPart=this.stringify(parseInt(n.slice(2)),!0);else{i.unit="thousand";let t=parseInt(n.slice(1));i.firstPart=e[n[0]],i.secondPart=this.stringify(t,!0)}return i.sepNeeded=i.secondPart.length>0&&!i.secondPart.includes("and"),i}handleFiveDigits(e){let t=e.toString(),n={unit:"thousand"};return n.firstPart=this.stringify(parseInt(t.slice(0,2)),!0),n.secondPart=this.stringify(parseInt(t.slice(2))),n}handleSixDigits(e){let t=e.toString(),n={unit:"thousand"};return n.firstPart=this.stringify(parseInt(t.slice(0,3)),!0),n.secondPart=this.stringify(parseInt(t.slice(3)),!0),n}}(123).stringify())})();
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_numbers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/numbers */ \"./src/utils/numbers.js\");\n/* harmony import */ var _utils_numbersClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/numbersClass */ \"./src/utils/numbersClass.js\");\n\n\n\nlet span = document.getElementById(\"stringified\");\nlet input = document.getElementById(\"input\");\ninput.addEventListener(\"input\", (ev) => {\n    console.log(ev.target.value);\n    console.log(parseInt(ev.target.value));\n    span.innerText = (0,_utils_numbers__WEBPACK_IMPORTED_MODULE_0__.stringifyNumber)(parseInt(ev.target.value));\n});\n\n\n//# sourceURL=webpack://js-numerals/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/utils/constants.js":
+/*!********************************!*\
+  !*** ./src/utils/constants.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"ONES\": () => (/* binding */ ONES),\n/* harmony export */   \"TEENS\": () => (/* binding */ TEENS),\n/* harmony export */   \"TENS\": () => (/* binding */ TENS)\n/* harmony export */ });\nconst ONES = {\n    0: \"\",\n    1: \"one\",\n    2: \"two\",\n    3: \"three\",\n    4: \"four\",\n    5: \"five\",\n    6: \"six\",\n    7: \"seven\",\n    8: \"eight\",\n    9: \"nine\",\n};\n\nconst TEENS = {\n    10: \"ten\",\n    11: \"eleven\",\n    12: \"twelve\",\n    13: \"thirteen\",\n    14: \"fourteen\",\n    15: \"fifteen\",\n    16: \"sixteen\",\n    17: \"seventeen\",\n    18: \"eighteen\",\n    19: \"nineteen\",\n};\n\nconst TENS = {\n    1: \"\", //handle teens separately,\n    2: \"twenty\",\n    3: \"thirty\",\n    4: \"forty\",\n    5: \"fifty\",\n    6: \"sixty\",\n    7: \"seventy\",\n    8: \"eighty\",\n    9: \"ninety\",\n};\n\n\n//# sourceURL=webpack://js-numerals/./src/utils/constants.js?");
+
+/***/ }),
+
+/***/ "./src/utils/numbers.js":
+/*!******************************!*\
+  !*** ./src/utils/numbers.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"stringifyNumber\": () => (/* binding */ stringifyNumber)\n/* harmony export */ });\n/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ \"./src/utils/constants.js\");\n\nconst stringifyNumber = (number, recursive = false) => {\n    if (typeof number !== \"number\" || isNaN(number))\n        return \"input must be a number\";\n    if (number == 0 && !recursive) return \"zero\";\n    let numberString = number.toString();\n    let sepNeeded;\n    let result = \"\";\n    let firstPart;\n    let secondPart;\n    let unit;\n    switch (numberString.length) {\n        case 1:\n            return _constants__WEBPACK_IMPORTED_MODULE_0__.ONES[number];\n        case 2:\n            if (numberString[0] == \"1\") {\n                result = _constants__WEBPACK_IMPORTED_MODULE_0__.TEENS[number];\n            } else {\n                sepNeeded = numberString[1] !== \"0\";\n                result = `${_constants__WEBPACK_IMPORTED_MODULE_0__.TENS[numberString[0]]}${sepNeeded ? \"-\" : \"\"}${\n                    _constants__WEBPACK_IMPORTED_MODULE_0__.ONES[numberString[1]]\n                }`;\n            }\n            return result;\n        case 3:\n            firstPart = _constants__WEBPACK_IMPORTED_MODULE_0__.ONES[numberString[0]];\n            secondPart = stringifyNumber(parseInt(numberString.slice(1)), true);\n            sepNeeded = secondPart.length > 0;\n            unit = \"hundred\";\n            break;\n        case 4:\n            if (numberString[0] == \"1\" && parseInt(numberString[1]) > 0) {\n                unit = \"hundred\";\n                firstPart = stringifyNumber(\n                    parseInt(numberString.slice(0, 2)),\n                    true\n                );\n                secondPart = stringifyNumber(\n                    parseInt(numberString.slice(2)),\n                    true\n                );\n            } else {\n                unit = \"thousand\";\n                let threeDigitPart = parseInt(numberString.slice(1));\n                firstPart = _constants__WEBPACK_IMPORTED_MODULE_0__.ONES[numberString[0]];\n                secondPart = stringifyNumber(threeDigitPart, true);\n            }\n            sepNeeded = secondPart.length > 0 && !secondPart.includes(\"and\");\n            break;\n        case 5:\n            unit = \"thousand\";\n            firstPart = stringifyNumber(\n                parseInt(numberString.slice(0, 2)),\n                true\n            );\n            secondPart = stringifyNumber(parseInt(numberString.slice(2)), true);\n            break;\n        case 6:\n            unit = \"thousand\";\n            firstPart = stringifyNumber(\n                parseInt(numberString.slice(0, 3)),\n                true\n            );\n            secondPart = stringifyNumber(parseInt(numberString.slice(3)), true);\n            break;\n        default:\n            return \"Number is too big\";\n    }\n    result = `${firstPart} ${unit}${sepNeeded ? \" and\" : \"\"} ${secondPart}`;\n    return result.trim();\n};\n\n\n//# sourceURL=webpack://js-numerals/./src/utils/numbers.js?");
+
+/***/ }),
+
+/***/ "./src/utils/numbersClass.js":
+/*!***********************************!*\
+  !*** ./src/utils/numbersClass.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Number\": () => (/* binding */ Number)\n/* harmony export */ });\n/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ \"./src/utils/constants.js\");\n\nclass Number {\n    constructor(number) {\n        if (typeof number !== \"number\" || isNaN(number)) {\n            this.number = null;\n            return;\n        }\n        this.number = number;\n    }\n\n    stringify(number = this.number, recursive = false) {\n        if (this.number == 0 && recursive == false) {\n            return \"zero\";\n        }\n        if (this.number === null) {\n            return \"input must be a number\";\n        }\n        if (this.number > 999999) {\n            return \"Number is too big\";\n        }\n        let params = {};\n        switch (number.toString().length) {\n            case 1:\n                return this.handleOneDigit(number);\n            case 2:\n                return this.handleTwoDigits(number);\n            case 3:\n                params = this.handleThreeDigits(number);\n                break;\n            case 4:\n                params = this.handleFourDigits(number);\n                break;\n            case 5:\n                params = this.handleFiveDigits(number);\n                break;\n            case 6:\n                params = this.handleSixDigits(number);\n        }\n        return `${params.firstPart} ${params.unit}${\n            params.sepNeeded ? \" and\" : \"\"\n        } ${params.secondPart}`.trim();\n    }\n\n    handleOneDigit(number) {\n        return _constants__WEBPACK_IMPORTED_MODULE_0__.ONES[number];\n    }\n\n    handleTwoDigits(number) {\n        let numberString = number.toString();\n        let result;\n        if (numberString[0] == \"1\") {\n            result = _constants__WEBPACK_IMPORTED_MODULE_0__.TEENS[number];\n        } else {\n            let sepNeeded = numberString[1] !== \"0\";\n            result = `${_constants__WEBPACK_IMPORTED_MODULE_0__.TENS[numberString[0]]}${sepNeeded ? \"-\" : \"\"}${\n                _constants__WEBPACK_IMPORTED_MODULE_0__.ONES[numberString[1]]\n            }`;\n        }\n        return result;\n    }\n\n    handleThreeDigits(number) {\n        let numberString = number.toString();\n        let result = {};\n        result.firstPart = _constants__WEBPACK_IMPORTED_MODULE_0__.ONES[numberString[0]];\n        result.secondPart = this.stringify(\n            parseInt(numberString.slice(1)),\n            true\n        );\n        result.sepNeeded = result.secondPart.length > 0;\n        result.unit = \"hundred\";\n        return result;\n    }\n\n    handleFourDigits(number) {\n        let numberString = number.toString();\n        let result = {};\n        if (numberString[0] == \"1\" && parseInt(numberString[1]) > 0) {\n            result.unit = \"hundred\";\n            result.firstPart = this.stringify(\n                parseInt(numberString.slice(0, 2)),\n                true\n            );\n            result.secondPart = this.stringify(\n                parseInt(numberString.slice(2)),\n                true\n            );\n        } else {\n            result.unit = \"thousand\";\n            let threeDigitPart = parseInt(numberString.slice(1));\n            result.firstPart = _constants__WEBPACK_IMPORTED_MODULE_0__.ONES[numberString[0]];\n            result.secondPart = this.stringify(threeDigitPart, true);\n        }\n        result.sepNeeded =\n            result.secondPart.length > 0 && !result.secondPart.includes(\"and\");\n        return result;\n    }\n\n    handleFiveDigits(number) {\n        let numberString = number.toString();\n        let result = {};\n        result.unit = \"thousand\";\n        result.firstPart = this.stringify(\n            parseInt(numberString.slice(0, 2)),\n            true\n        );\n        result.secondPart = this.stringify(parseInt(numberString.slice(2)));\n        return result;\n    }\n\n    handleSixDigits(number) {\n        let numberString = number.toString();\n        let result = {};\n        result.unit = \"thousand\";\n        result.firstPart = this.stringify(\n            parseInt(numberString.slice(0, 3)),\n            true\n        );\n        result.secondPart = this.stringify(\n            parseInt(numberString.slice(3)),\n            true\n        );\n        return result;\n    }\n}\n\n\n//# sourceURL=webpack://js-numerals/./src/utils/numbersClass.js?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		if(__webpack_module_cache__[moduleId]) {
+/******/ 			return __webpack_module_cache__[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	
+/******/ })()
+;

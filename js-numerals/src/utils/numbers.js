@@ -1,6 +1,7 @@
 import { ONES, TEENS, TENS } from "./constants";
 export const stringifyNumber = (number, recursive = false) => {
-    if (typeof number !== "number") return "input must be a number";
+    if (typeof number !== "number" || isNaN(number))
+        return "input must be a number";
     if (number == 0 && !recursive) return "zero";
     let numberString = number.toString();
     let sepNeeded;

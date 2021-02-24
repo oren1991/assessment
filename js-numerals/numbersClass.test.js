@@ -70,6 +70,7 @@ describe("Number class stringify", () => {
 
     it("should return invalid if not number", () => {
         expect(new Number("").stringify()).toBe("input must be a number");
+        expect(new Number(NaN).stringify()).toBe("input must be a number");
     });
 
     it("should convert numbers correctly", () => {

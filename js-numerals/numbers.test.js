@@ -65,6 +65,7 @@ describe("stringifyNumber", () => {
 
     it("should return invalid if not number", () => {
         expect(stringifyNumber("")).toBe("input must be a number");
+        expect(stringifyNumber(NaN)).toBe("input must be a number");
     });
 
     it("should convert numbers correctly", () => {

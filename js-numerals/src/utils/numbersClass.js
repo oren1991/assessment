@@ -1,7 +1,7 @@
 import { ONES, TEENS, TENS } from "./constants";
 export class Number {
     constructor(number) {
-        if (typeof number !== "number") {
+        if (typeof number !== "number" || isNaN(number)) {
             this.number = null;
             return;
         }
