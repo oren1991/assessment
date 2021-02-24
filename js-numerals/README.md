@@ -35,3 +35,10 @@ There was two approaches in my mind regarding the solution. Using only numbers a
 I went with the string path because I expected it to be more readable and extendable too, but if performance was a huge factor to consider I probably would have taken the modulo approach.
 
 Later in my solution I was thinking whether a class would be more suitable that's why I have two files and tests. I did not find much benefit of it over the simple function but I kept it. But choosing between the two would be a question of preference or the context where it would be used.
+
+## Part 2
+
+Realized that the solution needs to be a frontend solution, so I have set up a server that serves the static files.
+I used webpack to bundle the code developed in the first part. This builds up with the default config one main.js to the dist file which can be used in the served html page.
+
+Run `npm start` to serve the files, the server will listen on 3003 port.
