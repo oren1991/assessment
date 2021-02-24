@@ -1,42 +1,5 @@
+const { ONES, TEENS, TENS } = require("./constants");
 module.exports.stringifyNumber = (number) => {
-    const ones = {
-        0: "",
-        1: "one",
-        2: "two",
-        3: "three",
-        4: "four",
-        5: "five",
-        6: "six",
-        7: "seven",
-        8: "eight",
-        9: "nine",
-    };
-
-    const teens = {
-        10: "ten",
-        11: "eleven",
-        12: "twelve",
-        13: "thirteen",
-        14: "fourteen",
-        15: "fifteen",
-        16: "sixteen",
-        17: "seventeen",
-        18: "eighteen",
-        19: "nineteen",
-    };
-
-    const tens = {
-        1: "", //handle teens separately,
-        2: "twenty",
-        3: "thirty",
-        4: "forty",
-        5: "fifty",
-        6: "sixty",
-        7: "seventy",
-        8: "eighty",
-        9: "ninety",
-    };
-
     let numberString = number.toString();
     let sepNeeded;
     let result = "";
@@ -45,19 +8,19 @@ module.exports.stringifyNumber = (number) => {
     let unit;
     switch (numberString.length) {
         case 1:
-            return ones[number];
+            return ONES[number];
         case 2:
             if (numberString[0] == "1") {
-                result = teens[number];
+                result = TEENS[number];
             } else {
                 sepNeeded = numberString[1] !== "0";
-                result = `${tens[numberString[0]]}${sepNeeded ? "-" : ""}${
-                    ones[numberString[1]]
+                result = `${TENS[numberString[0]]}${sepNeeded ? "-" : ""}${
+                    ONES[numberString[1]]
                 }`;
             }
             return result;
         case 3:
-            firstPart = ones[numberString[0]];
+            firstPart = ONES[numberString[0]];
             secondPart = this.stringifyNumber(parseInt(numberString.slice(1)));
             sepNeeded = secondPart.length > 0;
             unit = "hundred";
@@ -74,7 +37,7 @@ module.exports.stringifyNumber = (number) => {
             } else {
                 unit = "thousand";
                 let threeDigitPart = parseInt(numberString.slice(1));
-                firstPart = ones[numberString[0]];
+                firstPart = ONES[numberString[0]];
                 secondPart = this.stringifyNumber(threeDigitPart);
             }
             sepNeeded = secondPart.length > 0 && !secondPart.includes("and");
