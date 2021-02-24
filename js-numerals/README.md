@@ -42,3 +42,5 @@ Realized that the solution needs to be a frontend solution, so I have set up a s
 I used webpack to bundle the code developed in the first part. This builds up with the default config one main.js to the dist file which can be used in the served html page.
 
 Run `npm start` to serve the files, the server will listen on 3003 port.
+
+Did not include any styling but let me know if it's necessary.
