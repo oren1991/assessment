@@ -45,8 +45,7 @@ module.exports.stringifyNumber = (number) => {
     let unit;
     switch (numberString.length) {
         case 1:
-            result = ones[number];
-            break;
+            return ones[number];
         case 2:
             if (numberString[0] == "1") {
                 result = teens[number];
@@ -56,23 +55,22 @@ module.exports.stringifyNumber = (number) => {
                     ones[numberString[1]]
                 }`;
             }
-
-            break;
+            return result;
         case 3:
-            twoDigitPart = parseInt(numberString.slice(1));
-            let stringifiedPart = this.stringifyNumber(twoDigitPart);
-            sepNeeded = stringifiedPart.length > 0;
-            result = `${ones[numberString[0]]} hundred ${
-                sepNeeded ? "and" : ""
-            } ${stringifiedPart}`;
+            firstPart = ones[numberString[0]];
+            secondPart = this.stringifyNumber(parseInt(numberString.slice(1)));
+            sepNeeded = secondPart.length > 0;
+            unit = "hundred";
             break;
         case 4:
             if (numberString[0] == "1" && parseInt(numberString[1]) > 0) {
                 unit = "hundred";
-                let twoDigitHundred = parseInt(numberString.slice(0, 2));
-                let twoDigitRest = parseInt(numberString.slice(2));
-                firstPart = this.stringifyNumber(twoDigitHundred);
-                secondPart = this.stringifyNumber(twoDigitRest);
+                firstPart = this.stringifyNumber(
+                    parseInt(numberString.slice(0, 2))
+                );
+                secondPart = this.stringifyNumber(
+                    parseInt(numberString.slice(2))
+                );
             } else {
                 unit = "thousand";
                 let threeDigitPart = parseInt(numberString.slice(1));
@@ -80,9 +78,6 @@ module.exports.stringifyNumber = (number) => {
                 secondPart = this.stringifyNumber(threeDigitPart);
             }
             sepNeeded = secondPart.length > 0 && !secondPart.includes("and");
-            result = `${firstPart} ${unit}${
-                sepNeeded ? " and" : ""
-            } ${secondPart}`;
             break;
         case 5:
             unit = "thousand";
@@ -90,9 +85,7 @@ module.exports.stringifyNumber = (number) => {
                 parseInt(numberString.slice(0, 2))
             );
             secondPart = this.stringifyNumber(parseInt(numberString.slice(2)));
-            result = `${firstPart} ${unit}${
-                sepNeeded ? " and" : ""
-            } ${secondPart}`;
     }
+    result = `${firstPart} ${unit}${sepNeeded ? " and" : ""} ${secondPart}`;
     return result.trim();
 };
