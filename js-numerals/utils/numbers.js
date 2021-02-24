@@ -12,6 +12,19 @@ module.exports.stringifyNumber = (number) => {
         9: "nine",
     };
 
+    const teens = {
+        10: "ten",
+        11: "eleven",
+        12: "twelve",
+        13: "thirteen",
+        14: "fourteen",
+        15: "fifteen",
+        16: "sixteen",
+        17: "seventeen",
+        18: "eighteen",
+        19: "nineteen",
+    };
+
     const tens = {
         1: "", //handle teens separately,
         2: "twenty",
@@ -32,10 +45,15 @@ module.exports.stringifyNumber = (number) => {
             result = ones[number];
             break;
         case 2:
-            sepNeeded = numberString[1] !== "0";
-            result = `${tens[numberString[0]]}${sepNeeded ? "-" : ""}${
-                ones[numberString[1]]
-            }`;
+            if (numberString[0] == "1") {
+                result = teens[number];
+            } else {
+                sepNeeded = numberString[1] !== "0";
+                result = `${tens[numberString[0]]}${sepNeeded ? "-" : ""}${
+                    ones[numberString[1]]
+                }`;
+            }
+
             break;
         case 3:
             twoDigitPart = parseInt(numberString.slice(1));
@@ -47,15 +65,17 @@ module.exports.stringifyNumber = (number) => {
             break;
         case 4:
             if (numberString[0] == "1" && parseInt(numberString[1]) > 0) {
-                //specialhandling TODO
+                let twoDigitHundred = parseInt(numberString.slice(0, 2));
+                let twoDigitRest = parseInt(numberString.slice(2));
+                result = `${this.stringifyNumber(
+                    twoDigitHundred
+                )} hundred ${this.stringifyNumber(twoDigitRest)}`;
             } else {
                 let threeDigitPart = parseInt(numberString.slice(1));
                 let stringifiedPart = this.stringifyNumber(threeDigitPart);
-                console.log(stringifiedPart.length);
                 sepNeeded =
                     stringifiedPart.length > 0 &&
                     !stringifiedPart.includes("and");
-                console.log(stringifiedPart);
                 result = `${ones[numberString[0]]} thousand ${
                     sepNeeded ? "and" : ""
                 } ${stringifiedPart}`;
