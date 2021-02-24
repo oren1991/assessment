@@ -1,8 +1,8 @@
 import { stringifyNumber } from "./utils/numbers";
-import { Number } from "./utils/numbersClass";
 
 let span = document.getElementById("stringified");
 let input = document.getElementById("input");
-input.addEventListener("input", (ev) => {
-    span.innerText = stringifyNumber(parseInt(ev.target.value));
+let submit = document.getElementById("submit");
+submit.addEventListener("click", () => {
+    span.innerText = stringifyNumber(parseInt(input.value));
 });
