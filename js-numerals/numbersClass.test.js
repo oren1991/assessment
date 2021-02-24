@@ -1,4 +1,4 @@
-import { Number } from "./utils/numbersClass";
+import { Number } from "./src/utils/numbersClass";
 describe("Number class stringify", () => {
     it("should convert one digit numbers", () => {
         expect(new Number(0).stringify()).toBe("zero");

@@ -1,4 +1,4 @@
-import { stringifyNumber } from "./utils/numbers";
+import { stringifyNumber } from "./src/utils/numbers";
 
 describe("stringifyNumber", () => {
     it("should convert one digit numbers", () => {

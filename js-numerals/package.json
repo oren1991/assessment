@@ -2,14 +2,16 @@
   "name": "js-numerals",
   "version": "1.0.0",
   "description": "## Instructions",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "webpack": "^5.24.1",
+    "webpack-cli": "^4.5.0"
   },
   "dependencies": {
     "@babel/core": "^7.13.1",
