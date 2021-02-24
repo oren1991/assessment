@@ -11,11 +11,13 @@ describe("stringifyNumber", () => {
         expect(stringifyNumber(201)).toBe("two hundred and one");
         expect(stringifyNumber(200)).toBe("two hundred");
         expect(stringifyNumber(2000)).toBe("two thousand");
+        expect(stringifyNumber(2010)).toBe("two thousand and ten");
+
         expect(stringifyNumber(2222)).toBe(
             "two thousand two hundred and twenty-two"
         );
-        expect(stringifyNumber(123456)).toBe(
-            "one hundred and twenty-three thousand four hundred and fifty-six"
+        expect(stringifyNumber(123411)).toBe(
+            "one hundred and twenty-three thousand four hundred and eleven"
         );
         expect(stringifyNumber(1000000)).toBe("Number is too big");
         expect(stringifyNumber("hello")).toBe("input must be a number");
