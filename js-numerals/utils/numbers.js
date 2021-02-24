@@ -67,9 +67,13 @@ module.exports.stringifyNumber = (number) => {
             if (numberString[0] == "1" && parseInt(numberString[1]) > 0) {
                 let twoDigitHundred = parseInt(numberString.slice(0, 2));
                 let twoDigitRest = parseInt(numberString.slice(2));
-                result = `${this.stringifyNumber(
-                    twoDigitHundred
-                )} hundred ${this.stringifyNumber(twoDigitRest)}`;
+                let firstPart = this.stringifyNumber(twoDigitHundred);
+                let secondPart = this.stringifyNumber(twoDigitRest);
+                sepNeeded =
+                    secondPart.length > 0 && !secondPart.includes("and");
+                result = `${firstPart} hundred ${
+                    sepNeeded ? "and" : ""
+                } ${secondPart}`;
             } else {
                 let threeDigitPart = parseInt(numberString.slice(1));
                 let stringifiedPart = this.stringifyNumber(threeDigitPart);
