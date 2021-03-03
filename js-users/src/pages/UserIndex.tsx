@@ -2,20 +2,13 @@ import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { Paginator } from "../components/Paginator";
 import { UserListItem } from "../components/UserListItem";
-import { User } from "../custom";
 
 import { useGetUsers } from "../utils/hooks/useGetUsers";
-import { useUpdateUser } from "../utils/hooks/useUpdateUser";
 export const UserIndex = () => {
     const history = useHistory();
     const { data } = useGetUsers();
-    const userMutation = useUpdateUser();
     const query = new URLSearchParams(useLocation().search);
 
-    const toggleStatus = (user: User) => ({
-        ...user,
-        status: user.status === "active" ? "locked" : "active",
-    });
     return (
         <div>
             <Paginator
@@ -35,11 +28,7 @@ export const UserIndex = () => {
                 {(users) => {
                     return users.map((user) => {
                         return (
-                            <UserListItem
-                                onClick={() =>
-                                    userMutation.mutate(toggleStatus(user))
-                                }
-                            >
+                            <UserListItem user={user}>
                                 <div
                                     style={{
                                         textDecoration:
