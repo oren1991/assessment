@@ -28,7 +28,7 @@ export const UserIndex = () => {
                 {(users) => {
                     return users.map((user) => {
                         return (
-                            <UserListItem user={user}>
+                            <UserListItem key={user.id} user={user}>
                                 <div
                                     style={{
                                         textDecoration:
