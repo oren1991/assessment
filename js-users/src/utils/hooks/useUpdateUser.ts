@@ -14,6 +14,7 @@ export const useUpdateUser = (userid: number | null | undefined) => {
         onSuccess: () => {
             if (userid) {
                 queryClient.invalidateQueries(`user_${userid}`);
+                queryClient.invalidateQueries("users");
             }
         },
     });
