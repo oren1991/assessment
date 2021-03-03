@@ -1,0 +1,42 @@
+import React from "react";
+import { useHistory, useLocation, useParams } from "react-router-dom";
+import { Paginator } from "../components/Paginator";
+import { UserListItem } from "../components/UserListItem";
+
+import { useGetUsers } from "../utils/hooks/useGetUsers";
+export const UserIndex = () => {
+    const history = useHistory();
+    const { data } = useGetUsers();
+    const query = new URLSearchParams(useLocation().search);
+    return (
+        <div>
+            <Paginator
+                data={data ? data : []}
+                basePage={query.get("page")}
+                nextPage={(page, setPage, maxPage) => {
+                    const newPage = Math.min(page + 1, maxPage);
+                    setPage(newPage);
+                    history.push(`/users?page=${newPage}`);
+                }}
+                prevPage={(page, setPage, minPage) => {
+                    const newPage = Math.max(page - 1, minPage);
+                    setPage(newPage);
+                    history.push(`/users?page=${newPage}`);
+                }}
+            >
+                {(users) => {
+                    return users.map((user) => {
+                        return (
+                            <UserListItem>
+                                <div>
+                                    {user.first_name} {user.last_name}
+                                </div>
+                                <span>{user.created_at}</span>
+                            </UserListItem>
+                        );
+                    });
+                }}
+            </Paginator>
+        </div>
+    );
+};

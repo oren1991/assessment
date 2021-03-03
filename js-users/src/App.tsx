@@ -1,18 +1,24 @@
 import "./App.css";
-import { useGetUsers } from "./utils/hooks/useGetUsers";
-import { UserListItem } from "./components/UserListItem";
-import { Paginator } from "./components/Paginator";
+import { UserIndex } from "./pages/UserIndex";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+} from "react-router-dom";
 function App() {
-    const { data } = useGetUsers();
     return (
         <div className="App">
-            <Paginator data={data ? data : []}>
-                {(users) => {
-                    return users.map((user) => {
-                        return <UserListItem>{user.first_name}</UserListItem>;
-                    });
-                }}
-            </Paginator>
+            <Router>
+                <Switch>
+                    <Route exact path="/users">
+                        <UserIndex />
+                    </Route>
+                    <Route>
+                        <Redirect to="/users" />
+                    </Route>
+                </Switch>
+            </Router>
         </div>
     );
 }

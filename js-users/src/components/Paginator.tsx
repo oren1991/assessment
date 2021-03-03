@@ -2,22 +2,48 @@ import React, { useState } from "react";
 
 type Props = {
     data: User[];
+    basePage?: string | null;
+    nextPage: (
+        page: number,
+        setPage: React.Dispatch<React.SetStateAction<number>>,
+        maxPage: number
+    ) => void;
+    prevPage: (
+        page: number,
+        setPage: React.Dispatch<React.SetStateAction<number>>,
+        minPage: number
+    ) => void;
     children: (props: User[]) => React.ReactNode;
 };
-export const Paginator = ({ data, children }: Props) => {
-    const [page, setPage] = useState<number>(0);
-    const currentUsers = data.slice(page, 10 + page);
+export const Paginator = ({
+    data,
+    children,
+    basePage,
+    nextPage,
+    prevPage,
+}: Props) => {
+    const startPage = basePage ? parseInt(basePage) : 1;
+    const [page, setPage] = useState<number>(isNaN(startPage) ? 1 : startPage);
+    const currentUsers = data.slice(10 * (page - 1), 10 + (page - 1) * 10);
 
     const handleNextPage = (
         event: React.MouseEvent<Element, MouseEvent>
     ): void => {
-        setPage((page) => page + 10);
+        nextPage(page, setPage, data.length / 10);
     };
+
+    const handlePrevPage = (
+        event: React.MouseEvent<Element, MouseEvent>
+    ): void => {
+        prevPage(page, setPage, 1);
+    };
+
     return (
         <div>
             {currentUsers ? children(currentUsers) : "empty"}
-
+            <button onClick={handlePrevPage}>prev</button>
             <button onClick={handleNextPage}>next</button>
+            {page}
         </div>
     ) as JSX.Element;
 };
