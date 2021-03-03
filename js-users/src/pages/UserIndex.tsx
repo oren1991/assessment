@@ -37,9 +37,10 @@ export const UserIndex = () => {
                                                 : " line-through",
                                     }}
                                 >
-                                    {user.first_name} {user.last_name}
+                                    <div>First name: {user.first_name}</div>
+                                    <div>Last name: {user.last_name}</div>
+                                    <div>Created at: {user.created_at}</div>
                                 </div>
-                                <span>{user.created_at}</span>
                             </UserListItem>
                         );
                     });
