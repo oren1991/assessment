@@ -8,26 +8,30 @@ import {
     Route,
     Redirect,
 } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+const client = new QueryClient();
 function App() {
     return (
-        <div className="App">
-            <Router>
-                <Switch>
-                    <Route exact path="/">
-                        <UserIndex />
-                    </Route>
-                    <Route exact path="/new">
-                        <UserNew />
-                    </Route>
-                    <Route exact path="/edit/:userId">
-                        <UserEdit></UserEdit>
-                    </Route>
-                    <Route>
-                        <Redirect to="/" />
-                    </Route>
-                </Switch>
-            </Router>
-        </div>
+        <QueryClientProvider client={client}>
+            <div className="App">
+                <Router>
+                    <Switch>
+                        <Route exact path="/">
+                            <UserIndex />
+                        </Route>
+                        <Route exact path="/new">
+                            <UserNew />
+                        </Route>
+                        <Route exact path="/edit/:userId">
+                            <UserEdit></UserEdit>
+                        </Route>
+                        <Route>
+                            <Redirect to="/" />
+                        </Route>
+                    </Switch>
+                </Router>
+            </div>
+        </QueryClientProvider>
     );
 }
 
