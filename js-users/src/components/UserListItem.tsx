@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const UserListItem: React.FC<Props> = ({ children, user }) => {
-    const userMutation = useUpdateUser();
+    const userMutation = useUpdateUser(user.id);
     const toggleStatus = (user: User) => ({
         ...user,
         status: user.status === "active" ? "locked" : "active",

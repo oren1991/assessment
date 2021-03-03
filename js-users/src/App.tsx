@@ -1,5 +1,7 @@
 import "./App.css";
 import { UserIndex } from "./pages/UserIndex";
+import { UserNew } from "./pages/UserNew";
+import { UserEdit } from "./pages/UserEdit";
 import {
     BrowserRouter as Router,
     Switch,
@@ -13,6 +15,12 @@ function App() {
                 <Switch>
                     <Route exact path="/">
                         <UserIndex />
+                    </Route>
+                    <Route exact path="/new">
+                        <UserNew />
+                    </Route>
+                    <Route exact path="/edit/:userId">
+                        <UserEdit></UserEdit>
                     </Route>
                     <Route>
                         <Redirect to="/" />

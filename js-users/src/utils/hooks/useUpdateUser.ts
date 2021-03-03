@@ -7,10 +7,14 @@ const update = async (user: User) => {
     const { data } = await updateUser(user);
     return data;
 };
-export const useUpdateUser = () => {
+export const useUpdateUser = (userid: number | null | undefined) => {
     const queryClient = useQueryClient();
     return useMutation<User, Error, any>((user: User) => update(user), {
         retry: false,
-        onSuccess: () => queryClient.invalidateQueries("users"),
+        onSuccess: () => {
+            if (userid) {
+                queryClient.invalidateQueries(`user_${userid}`);
+            }
+        },
     });
 };
