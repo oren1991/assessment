@@ -11,11 +11,11 @@ function App() {
         <div className="App">
             <Router>
                 <Switch>
-                    <Route exact path="/users">
+                    <Route exact path="/">
                         <UserIndex />
                     </Route>
                     <Route>
-                        <Redirect to="/users" />
+                        <Redirect to="/" />
                     </Route>
                 </Switch>
             </Router>

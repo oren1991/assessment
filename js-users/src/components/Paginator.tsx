@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { User } from "../custom";
 type Props = {
     data: User[];
     basePage?: string | null;

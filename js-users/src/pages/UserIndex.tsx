@@ -1,13 +1,21 @@
 import React from "react";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Paginator } from "../components/Paginator";
 import { UserListItem } from "../components/UserListItem";
+import { User } from "../custom";
 
 import { useGetUsers } from "../utils/hooks/useGetUsers";
+import { useUpdateUser } from "../utils/hooks/useUpdateUser";
 export const UserIndex = () => {
     const history = useHistory();
     const { data } = useGetUsers();
+    const userMutation = useUpdateUser();
     const query = new URLSearchParams(useLocation().search);
+
+    const toggleStatus = (user: User) => ({
+        ...user,
+        status: user.status === "active" ? "locked" : "active",
+    });
     return (
         <div>
             <Paginator
@@ -16,19 +24,30 @@ export const UserIndex = () => {
                 nextPage={(page, setPage, maxPage) => {
                     const newPage = Math.min(page + 1, maxPage);
                     setPage(newPage);
-                    history.push(`/users?page=${newPage}`);
+                    history.push(`/?page=${newPage}`);
                 }}
                 prevPage={(page, setPage, minPage) => {
                     const newPage = Math.max(page - 1, minPage);
                     setPage(newPage);
-                    history.push(`/users?page=${newPage}`);
+                    history.push(`/?page=${newPage}`);
                 }}
             >
                 {(users) => {
                     return users.map((user) => {
                         return (
-                            <UserListItem>
-                                <div>
+                            <UserListItem
+                                onClick={() =>
+                                    userMutation.mutate(toggleStatus(user))
+                                }
+                            >
+                                <div
+                                    style={{
+                                        textDecoration:
+                                            user.status === "active"
+                                                ? "none"
+                                                : " line-through",
+                                    }}
+                                >
                                     {user.first_name} {user.last_name}
                                 </div>
                                 <span>{user.created_at}</span>
