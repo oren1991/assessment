@@ -15,13 +15,13 @@ type Props = {
     ) => void;
     children: (props: User[]) => React.ReactNode;
 };
-export const Paginator = ({
+export const Paginator: React.FC<Props> = ({
     data,
     children,
     basePage,
     nextPage,
     prevPage,
-}: Props) => {
+}) => {
     const startPage = basePage ? parseInt(basePage) : 1;
     const [page, setPage] = useState<number>(isNaN(startPage) ? 1 : startPage);
     const currentUsers = data.slice(10 * (page - 1), 10 + (page - 1) * 10);
@@ -45,5 +45,5 @@ export const Paginator = ({
             <button onClick={handleNextPage}>next</button>
             {page}
         </div>
-    ) as JSX.Element;
+    );
 };
