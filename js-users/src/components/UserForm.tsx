@@ -11,7 +11,7 @@ type Props = {
 export const UserForm: React.FC<Props> = ({ user, mutation }) => {
     const [userForm, setUser] = useForm<User>({ status: "active", ...user });
     return (
-        <div>
+        <form data-testid="user-form">
             <label htmlFor="first_name">First name: </label>
             <input
                 onChange={setUser}
@@ -31,6 +31,6 @@ export const UserForm: React.FC<Props> = ({ user, mutation }) => {
             >
                 Submit
             </button>
-        </div>
+        </form>
     );
 };
