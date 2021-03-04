@@ -3,24 +3,14 @@ import { User } from "../custom";
 type Props = {
     data: User[];
     basePage?: string | null;
-    nextPage: (
-        page: number,
-        setPage: React.Dispatch<React.SetStateAction<number>>,
-        maxPage: number
-    ) => void;
-    prevPage: (
-        page: number,
-        setPage: React.Dispatch<React.SetStateAction<number>>,
-        minPage: number
-    ) => void;
+    onPageChange?: (page: number) => void;
     children: (props: User[]) => React.ReactNode;
 };
 export const Paginator: React.FC<Props> = ({
     data,
     children,
     basePage,
-    nextPage,
-    prevPage,
+    onPageChange,
 }) => {
     const startPage = basePage ? parseInt(basePage) : 1;
     const [page, setPage] = useState<number>(isNaN(startPage) ? 1 : startPage);
@@ -29,13 +19,21 @@ export const Paginator: React.FC<Props> = ({
     const handleNextPage = (
         event: React.MouseEvent<Element, MouseEvent>
     ): void => {
-        nextPage(page, setPage, data.length / 10);
+        setPage((page) => {
+            const newPage = Math.min(page + 1, data.length / 10);
+            onPageChange && onPageChange(newPage);
+            return newPage;
+        });
     };
 
     const handlePrevPage = (
         event: React.MouseEvent<Element, MouseEvent>
     ): void => {
-        prevPage(page, setPage, 1);
+        setPage((page) => {
+            const newPage = Math.max(page - 1, 1);
+            onPageChange && onPageChange(newPage);
+            return newPage;
+        });
     };
 
     return (

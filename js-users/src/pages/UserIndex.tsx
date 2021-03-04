@@ -14,36 +14,25 @@ export const UserIndex = () => {
             <Paginator
                 data={data ? data : []}
                 basePage={query.get("page")}
-                nextPage={(page, setPage, maxPage) => {
-                    const newPage = Math.min(page + 1, maxPage);
-                    setPage(newPage);
-                    history.push(`/?page=${newPage}`);
-                }}
-                prevPage={(page, setPage, minPage) => {
-                    const newPage = Math.max(page - 1, minPage);
-                    setPage(newPage);
-                    history.push(`/?page=${newPage}`);
-                }}
+                onPageChange={(page) => history.push(`/?page=${page}`)}
             >
                 {(users) => {
-                    return users.map((user) => {
-                        return (
-                            <UserListItem key={user.id} user={user}>
-                                <div
-                                    style={{
-                                        textDecoration:
-                                            user.status === "active"
-                                                ? "none"
-                                                : " line-through",
-                                    }}
-                                >
-                                    <div>First name: {user.first_name}</div>
-                                    <div>Last name: {user.last_name}</div>
-                                    <div>Created at: {user.created_at}</div>
-                                </div>
-                            </UserListItem>
-                        );
-                    });
+                    return users.map((user) => (
+                        <UserListItem key={user.id} user={user}>
+                            <div
+                                style={{
+                                    textDecoration:
+                                        user.status === "active"
+                                            ? "none"
+                                            : " line-through",
+                                }}
+                            >
+                                <div>First name: {user.first_name}</div>
+                                <div>Last name: {user.last_name}</div>
+                                <div>Created at: {user.created_at}</div>
+                            </div>
+                        </UserListItem>
+                    ));
                 }}
             </Paginator>
         </div>
