@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { User } from "../../custom";
 import { UserEdit } from "../UserEdit";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -18,7 +18,6 @@ jest.mock("../../utils/hooks/useGetUser", () => ({
 }));
 
 describe("<UserEdit />", () => {
-    beforeEach(() => {});
     it("should render the userform if there is user", async () => {
         (useGetUser as jest.Mock).mockImplementation(() => ({
             data: dummyUser,
