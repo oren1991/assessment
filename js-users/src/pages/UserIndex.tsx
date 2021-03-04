@@ -10,7 +10,7 @@ export const UserIndex = () => {
     const query = new URLSearchParams(useLocation().search);
 
     return (
-        <div>
+        <div data-testid="user-index">
             <Paginator
                 data={data ? data : []}
                 basePage={query.get("page")}

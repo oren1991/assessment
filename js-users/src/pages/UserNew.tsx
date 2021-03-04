@@ -7,7 +7,7 @@ export const UserNew = () => {
     const user: User = { first_name: "", last_name: "" };
     const createUser = useCreateUser();
     return (
-        <div>
+        <div data-testid="user-new-form">
             <UserForm user={user} mutation={createUser} />
         </div>
     );

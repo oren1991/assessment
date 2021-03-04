@@ -1,4 +1,4 @@
-import { getUser } from "./../api/users";
+import { getUser } from "../api/users";
 import { useQuery } from "react-query";
 import { User } from "../../custom";
 
