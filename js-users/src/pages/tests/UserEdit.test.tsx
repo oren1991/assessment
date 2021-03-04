@@ -48,4 +48,23 @@ describe("<UserEdit />", () => {
         const form = screen.queryByTestId("user-form");
         expect(form).toBeNull();
     });
+
+    it("should render field first_name and last_name with values", async () => {
+        (useGetUser as jest.Mock).mockImplementation(() => ({
+            data: dummyUser,
+        }));
+        render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <UserEdit></UserEdit>
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+        const form = await screen.findByTestId("user-form");
+
+        expect(form).toHaveFormValues({
+            first_name: dummyUser.first_name,
+            last_name: dummyUser.last_name,
+        });
+    });
 });
