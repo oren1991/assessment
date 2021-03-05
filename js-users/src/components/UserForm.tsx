@@ -28,7 +28,11 @@ export const UserForm: React.FC<Props> = ({ user, mutation }) => {
             <button
                 onClick={(e) => {
                     e.preventDefault();
-                    mutation.mutate(userForm);
+                    mutation.mutate({
+                        id: userForm.id,
+                        first_name: userForm.first_name,
+                        last_name: userForm.last_name,
+                    });
                 }}
             >
                 Submit

@@ -4,8 +4,16 @@ import { User } from "../../custom";
 import { useQueryClient } from "react-query";
 
 const create = async (user: User) => {
-    const { data } = await createUser(user);
-    return data;
+    try {
+        const { data } = await createUser(user);
+        return data;
+    } catch (err) {
+        if (err.data) {
+            throw err.data;
+        } else {
+            throw new Error("Unexpected Error");
+        }
+    }
 };
 export const useCreateUser = () => {
     const queryClient = useQueryClient();

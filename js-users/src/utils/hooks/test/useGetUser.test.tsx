@@ -27,7 +27,7 @@ describe("useGetUser", () => {
         expect(result.current.data).toEqual(dummyUser);
     });
 
-    it("should return [] when failed", async () => {
+    it("should return undefined when failed", async () => {
         const queryClient = new QueryClient();
         const wrapper: React.FC = ({ children }) => (
             <QueryClientProvider client={queryClient}>

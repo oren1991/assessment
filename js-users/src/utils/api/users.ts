@@ -6,7 +6,7 @@ export const getUser = (userId: string) =>
     axios.get(
         `http://js-assessment-backend.herokuapp.com/users/${userId}.json`
     );
-export const updateUser = (user: User) =>
+export const updateUser = (user: Partial<User>) =>
     axios.put(
         `http://js-assessment-backend.herokuapp.com/users/${user.id}.json`,
         user
