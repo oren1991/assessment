@@ -1,10 +1,7 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import { User } from "../../custom";
 import { UserNew } from "../UserNew";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
-import { useGetUser } from "../../utils/hooks/useGetUser";
 
 const queryClient = new QueryClient();
 

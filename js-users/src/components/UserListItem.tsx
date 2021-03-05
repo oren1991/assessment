@@ -3,7 +3,6 @@ import { useUpdateUser } from "../utils/hooks/useUpdateUser";
 import React from "react";
 
 type Props = {
-    children: React.ReactNode;
     user: User;
 };
 
@@ -20,7 +19,18 @@ export const UserListItem: React.FC<Props> = ({ children, user }) => {
                 "Updating user..."
             ) : (
                 <div>
-                    {children}
+                    <div
+                        style={{
+                            textDecoration:
+                                user.status === "active"
+                                    ? "none"
+                                    : " line-through",
+                        }}
+                    >
+                        <div>First name: {user.first_name}</div>
+                        <div>Last name: {user.last_name}</div>
+                        <div>Created at: {user.created_at}</div>
+                    </div>
                     <button
                         onClick={() => userMutation.mutate(toggleStatus(user))}
                     >

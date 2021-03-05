@@ -14,24 +14,12 @@ export const UserIndex = () => {
             <Paginator
                 data={data ? data : []}
                 basePage={query.get("page")}
+                perPage={10}
                 onPageChange={(page) => history.push(`/?page=${page}`)}
             >
                 {(users) => {
                     return users.map((user) => (
-                        <UserListItem key={user.id} user={user}>
-                            <div
-                                style={{
-                                    textDecoration:
-                                        user.status === "active"
-                                            ? "none"
-                                            : " line-through",
-                                }}
-                            >
-                                <div>First name: {user.first_name}</div>
-                                <div>Last name: {user.last_name}</div>
-                                <div>Created at: {user.created_at}</div>
-                            </div>
-                        </UserListItem>
+                        <UserListItem key={user.id} user={user} />
                     ));
                 }}
             </Paginator>
