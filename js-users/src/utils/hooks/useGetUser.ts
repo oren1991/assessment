@@ -8,5 +8,7 @@ const get = (userId: string) => async () => {
 };
 
 export const useGetUser = (userId: string) => {
-    return useQuery<User | null>(`user_${userId}`, get(userId));
+    return useQuery<User | null>(`user_${userId}`, get(userId), {
+        retry: false,
+    });
 };
