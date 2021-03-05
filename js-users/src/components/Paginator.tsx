@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { User } from "../custom";
-type Props = {
-    data: User[];
+import React, { PropsWithChildren, useState } from "react";
+type Props<T> = {
+    data: T[];
     basePage?: string | null;
     perPage: number;
     onPageChange?: (page: number) => void;
-    children: (props: User[]) => React.ReactNode;
+    children: (props: T[]) => React.ReactNode;
 };
-export const Paginator: React.FC<Props> = ({
+
+export const Paginator = <T,>({
     data,
     children,
     basePage,
     perPage,
     onPageChange,
-}) => {
+}: PropsWithChildren<Props<T>>) => {
     const startPage = basePage ? parseInt(basePage) : 1;
     const [page, setPage] = useState<number>(isNaN(startPage) ? 1 : startPage);
-    const currentUsers = data.slice(
+    const currentItems = data.slice(
         perPage * (page - 1),
         perPage + (page - 1) * perPage
     );
@@ -24,7 +24,7 @@ export const Paginator: React.FC<Props> = ({
     const handleNextPage = (
         event: React.MouseEvent<Element, MouseEvent>
     ): void => {
-        const newPage = Math.min(page + 1, data.length / 10);
+        const newPage = Math.min(page + 1, Math.ceil(data.length / perPage));
         setPage(newPage);
         onPageChange && onPageChange(newPage);
     };
@@ -39,7 +39,7 @@ export const Paginator: React.FC<Props> = ({
 
     return (
         <div>
-            {currentUsers ? children(currentUsers) : "empty"}
+            {currentItems ? children(currentItems) : "empty"}
             <button data-testid="prev-page" onClick={handlePrevPage}>
                 prev
             </button>

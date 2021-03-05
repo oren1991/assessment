@@ -1,11 +1,10 @@
 import React from "react";
-import { UseMutationResult } from "react-query";
 import { User } from "../custom";
 import { useForm } from "../utils/hooks/useForm";
 
 type Props = {
     user: User;
-    mutation: UseMutationResult<User, Error, any, unknown>;
+    mutation: { mutate: (user: User) => void; error: Error | null };
 };
 
 export const UserForm: React.FC<Props> = ({ user, mutation }) => {
@@ -15,12 +14,14 @@ export const UserForm: React.FC<Props> = ({ user, mutation }) => {
             {JSON.stringify(mutation.error)}
             <label htmlFor="first_name">First name: </label>
             <input
+                data-testid="first-name"
                 onChange={setUser}
                 name="first_name"
                 value={userForm.first_name}
             />
             <label htmlFor="last_name">Last name: </label>
             <input
+                data-testid="last-name"
                 onChange={setUser}
                 name="last_name"
                 value={userForm.last_name}

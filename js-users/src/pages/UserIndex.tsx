@@ -1,6 +1,7 @@
 import { useHistory, useLocation } from "react-router-dom";
 import { Paginator } from "../components/Paginator";
 import { UserListItem } from "../components/UserListItem";
+import { User } from "../custom";
 
 import { useGetUsers } from "../utils/hooks/useGetUsers";
 export const UserIndex = () => {
@@ -14,7 +15,7 @@ export const UserIndex = () => {
 
     return (
         <div data-testid="user-index">
-            <Paginator
+            <Paginator<User>
                 data={data ? data : []}
                 basePage={query.get("page")}
                 perPage={10}
