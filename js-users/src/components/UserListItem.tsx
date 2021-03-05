@@ -6,7 +6,7 @@ type Props = {
     user: User;
 };
 
-export const UserListItem: React.FC<Props> = ({ children, user }) => {
+export const UserListItem: React.FC<Props> = ({ user }) => {
     const userMutation = useUpdateUser(user.id);
     const toggleStatus = (user: User) => ({
         ...user,
@@ -14,7 +14,7 @@ export const UserListItem: React.FC<Props> = ({ children, user }) => {
     });
 
     return (
-        <div>
+        <div data-testid="user-list-item">
             {userMutation.isLoading ? (
                 "Updating user..."
             ) : (

@@ -10,7 +10,7 @@ describe("<UserNew />", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <UserNew></UserNew>
+                    <UserNew />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -22,7 +22,7 @@ describe("<UserNew />", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <UserNew></UserNew>
+                    <UserNew />
                 </MemoryRouter>
             </QueryClientProvider>
         );

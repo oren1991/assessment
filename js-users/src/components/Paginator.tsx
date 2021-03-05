@@ -24,28 +24,28 @@ export const Paginator: React.FC<Props> = ({
     const handleNextPage = (
         event: React.MouseEvent<Element, MouseEvent>
     ): void => {
-        setPage((page) => {
-            const newPage = Math.min(page + 1, data.length / 10);
-            onPageChange && onPageChange(newPage);
-            return newPage;
-        });
+        const newPage = Math.min(page + 1, data.length / 10);
+        setPage(newPage);
+        onPageChange && onPageChange(newPage);
     };
 
     const handlePrevPage = (
         event: React.MouseEvent<Element, MouseEvent>
     ): void => {
-        setPage((page) => {
-            const newPage = Math.max(page - 1, 1);
-            onPageChange && onPageChange(newPage);
-            return newPage;
-        });
+        const newPage = Math.max(page - 1, 1);
+        setPage(newPage);
+        onPageChange && onPageChange(newPage);
     };
 
     return (
         <div>
             {currentUsers ? children(currentUsers) : "empty"}
-            <button onClick={handlePrevPage}>prev</button>
-            <button onClick={handleNextPage}>next</button>
+            <button data-testid="prev-page" onClick={handlePrevPage}>
+                prev
+            </button>
+            <button data-testid="next-page" onClick={handleNextPage}>
+                next
+            </button>
             {page}
         </div>
     );

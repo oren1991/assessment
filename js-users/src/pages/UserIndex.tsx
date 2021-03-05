@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { Paginator } from "../components/Paginator";
 import { UserListItem } from "../components/UserListItem";
@@ -9,13 +9,17 @@ export const UserIndex = () => {
     const { data } = useGetUsers();
     const query = new URLSearchParams(useLocation().search);
 
+    const handlePageChange = (page: number) => {
+        history.push(`/?page=${page}`);
+    };
+
     return (
         <div data-testid="user-index">
             <Paginator
                 data={data ? data : []}
                 basePage={query.get("page")}
                 perPage={10}
-                onPageChange={(page) => history.push(`/?page=${page}`)}
+                onPageChange={handlePageChange}
             >
                 {(users) => {
                     return users.map((user) => (

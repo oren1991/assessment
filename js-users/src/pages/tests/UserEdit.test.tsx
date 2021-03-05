@@ -25,7 +25,7 @@ describe("<UserEdit />", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <UserEdit></UserEdit>
+                    <UserEdit />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -40,7 +40,7 @@ describe("<UserEdit />", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <UserEdit></UserEdit>
+                    <UserEdit />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -55,7 +55,7 @@ describe("<UserEdit />", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <UserEdit></UserEdit>
+                    <UserEdit />
                 </MemoryRouter>
             </QueryClientProvider>
         );
