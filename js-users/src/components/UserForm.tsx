@@ -12,6 +12,7 @@ export const UserForm: React.FC<Props> = ({ user, mutation }) => {
     const [userForm, setUser] = useForm<User>({ status: "active", ...user });
     return (
         <form data-testid="user-form">
+            {JSON.stringify(mutation.error)}
             <label htmlFor="first_name">First name: </label>
             <input
                 onChange={setUser}
@@ -25,7 +26,8 @@ export const UserForm: React.FC<Props> = ({ user, mutation }) => {
                 value={userForm.last_name}
             />
             <button
-                onClick={() => {
+                onClick={(e) => {
+                    e.preventDefault();
                     mutation.mutate(userForm);
                 }}
             >

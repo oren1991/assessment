@@ -3,7 +3,9 @@ import { render, screen } from "@testing-library/react";
 import App from "../App";
 import { createMemoryHistory } from "history";
 import { Router, MemoryRouter } from "react-router-dom";
-
+import { QueryClientProvider, QueryClient } from "react-query";
+import { useGetUser } from "../utils/hooks/useGetUser";
+const queryClient = new QueryClient();
 jest.mock("react-router-dom", () => {
     const originalModule = jest.requireActual("react-router-dom");
 
@@ -31,11 +33,16 @@ describe("<App />", () => {
 
     it("should navigate correctly", () => {
         const history = createMemoryHistory();
+        (useGetUser as jest.Mock).mockImplementation(() => ({
+            data: {},
+        }));
 
         render(
-            <Router history={history}>
-                <App />
-            </Router>
+            <QueryClientProvider client={queryClient}>
+                <Router history={history}>
+                    <App />
+                </Router>
+            </QueryClientProvider>
         );
 
         history.push("/new");
