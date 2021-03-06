@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const UserListItemContainer = styled.div`
     width: 400px;
-    background-color: #eaf5ff;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 6px 12px 6px 12px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 2px;
@@ -14,7 +14,7 @@ export const UserListItemContainer = styled.div`
     transition: 0.3s;
     :hover {
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        background-color: #f0f7fd;
+        background-color: rgba(255, 255, 255, 0.9);
     }
     @media (max-width: 450px) {
         width: 80%;

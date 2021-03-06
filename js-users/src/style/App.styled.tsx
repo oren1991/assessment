@@ -5,10 +5,14 @@ export const AppContainer = styled.div`
     display: flex;
     flex-flow: column;
     background: linear-gradient(
-        0deg,
-        rgba(175, 254, 255, 0.25) 0%,
-        rgba(220, 249, 213, 0.34) 47%,
-        rgba(255, 243, 218, 0.41) 100%
+        45deg,
+        rgba(56, 253, 255, 1) 0%,
+        rgba(213, 255, 203, 1) 31%,
+        rgba(255, 255, 185, 1) 31%,
+        rgba(255, 218, 254, 1) 57%,
+        rgba(201, 195, 255, 1) 57%,
+        rgba(247, 217, 234, 1) 86%,
+        rgba(150, 255, 236, 1) 86%
     );
 `;
 

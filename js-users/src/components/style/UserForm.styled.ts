@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const UserFormForm = styled.form`
     min-width: 400px;
-    background-color: #eaf5ff;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 6px 12px 6px 12px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 2px;
