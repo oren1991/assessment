@@ -7,7 +7,9 @@ import {
     UserListItemInfo,
     UserListItemName,
     UserListItemLockButton,
-} from "./UserListItem.style";
+} from "./UserListItem.styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faUserLock } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
     user: User;
@@ -46,7 +48,19 @@ export const UserListItem: React.FC<Props> = ({ user }) => {
                 <UserListItemLockButton
                     onClick={() => userMutation.mutate(toggleStatus(user))}
                 >
-                    {user.status === "active" ? "Lock user" : "Unlock user"}
+                    {user.status === "locked" ? (
+                        <FontAwesomeIcon
+                            data-testid="user-icon"
+                            icon={faUser}
+                            size="lg"
+                        ></FontAwesomeIcon>
+                    ) : (
+                        <FontAwesomeIcon
+                            data-testid="lock-icon"
+                            icon={faUserLock}
+                            size="lg"
+                        ></FontAwesomeIcon>
+                    )}
                 </UserListItemLockButton>
             </>
         </UserListItemContainer>

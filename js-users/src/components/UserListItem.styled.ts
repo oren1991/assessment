@@ -6,7 +6,7 @@ export const UserListItemContainer = styled.div`
     padding: 6px 12px 6px 12px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 2px;
-    margin: 12px;
+    margin: 6px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -47,9 +47,8 @@ export const UserListItemDate = styled.div`
 export const UserListItemLockButton = styled.button`
     display: block;
     height: 50px;
-    width: 100px;
-    min-width: 100px;
-    border-radius: 10px;
+    width: 50px;
+    border-radius: 1px;
     :hover {
         background-color: white;
         cursor: pointer;

@@ -22,15 +22,15 @@ describe("<Paginator />", () => {
     });
 
     it("should render prev and next buttons", async () => {
-        const prevButton = await screen.findByText("prev");
-        const nextButton = await screen.findByText("next");
+        const prevButton = await screen.findByTestId("prev-page");
+        const nextButton = await screen.findByTestId("next-page");
         expect(prevButton).toBeInTheDocument();
         expect(nextButton).toBeInTheDocument();
     });
 
     it("should trigger onPageChange", async () => {
-        const prevButton = await screen.findByText("prev");
-        const nextButton = await screen.findByText("next");
+        const prevButton = await screen.findByTestId("prev-page");
+        const nextButton = await screen.findByTestId("next-page");
 
         fireEvent.click(nextButton);
         expect(pageTrigger).toBeCalledWith(2);

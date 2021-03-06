@@ -37,7 +37,7 @@ describe("<UserListItem />", () => {
     });
 
     it("should render activate/lock button", async () => {
-        const button = await screen.findByText(/Lock/);
+        const button = await screen.findByTestId("lock-icon");
         fireEvent.click(button);
         expect(button).toBeInTheDocument();
         expect(mockApiCall).toBeCalled();
