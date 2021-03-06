@@ -3,21 +3,31 @@ import React from "react";
 import { QueryClientProvider } from "react-query";
 import { QueryClient } from "react-query";
 import { useCreateUser } from "../useCreateUser";
+import { Router, useLocation } from "react-router";
+import { createMemoryHistory } from "history";
 import axios from "axios";
 
 jest.mock("axios");
 describe("useCreateUser", () => {
     it("should be successful with the mutation if 200 response", async () => {
         const queryClient = new QueryClient();
+        const history = createMemoryHistory();
+        history.push("/new");
         const wrapper: React.FC = ({ children }) => (
-            <QueryClientProvider client={queryClient}>
-                {children}
-            </QueryClientProvider>
+            <Router history={history}>
+                <QueryClientProvider client={queryClient}>
+                    {children}
+                </QueryClientProvider>
+            </Router>
         );
         (axios as jest.Mocked<typeof axios>).post.mockReturnValueOnce(
             Promise.resolve({ data: {} })
         );
-        const { result, waitFor } = renderHook(() => useCreateUser(), {
+        const { result, waitFor } = renderHook(() => useCreateUser(true), {
+            wrapper,
+        });
+
+        const { result: locationResult } = renderHook(() => useLocation(), {
             wrapper,
         });
 
@@ -25,6 +35,7 @@ describe("useCreateUser", () => {
 
         await waitFor(() => result.current.isSuccess);
         expect(result.current.error).toBeNull();
+        expect(locationResult.current.pathname).toBe("/");
     });
 
     it("should return the form errors in the error", async () => {

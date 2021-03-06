@@ -4,20 +4,30 @@ import { QueryClientProvider } from "react-query";
 import { QueryClient } from "react-query";
 import { useUpdateUser } from "../useUpdateUser";
 import axios from "axios";
+import { Router, useLocation } from "react-router";
+import { createMemoryHistory } from "history";
 
 jest.mock("axios");
 describe("useUpdateUser", () => {
     it("should be successful with the mutation if 200 response", async () => {
         const queryClient = new QueryClient();
+        const history = createMemoryHistory();
+        history.push("/edit/1");
         const wrapper: React.FC = ({ children }) => (
-            <QueryClientProvider client={queryClient}>
-                {children}
-            </QueryClientProvider>
+            <Router history={history}>
+                <QueryClientProvider client={queryClient}>
+                    {children}
+                </QueryClientProvider>
+            </Router>
         );
         (axios as jest.Mocked<typeof axios>).put.mockReturnValueOnce(
             Promise.resolve({ data: {} })
         );
-        const { result, waitFor } = renderHook(() => useUpdateUser(1), {
+        const { result, waitFor } = renderHook(() => useUpdateUser(1, true), {
+            wrapper,
+        });
+
+        const { result: locationResult } = renderHook(() => useLocation(), {
             wrapper,
         });
 
@@ -25,6 +35,7 @@ describe("useUpdateUser", () => {
 
         await waitFor(() => result.current.isSuccess);
         expect(result.current.error).toBeNull();
+        expect(locationResult.current.pathname).toBe("/");
     });
 
     it("should return the form errors in the error", async () => {

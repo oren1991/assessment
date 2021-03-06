@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import { updateUser } from "./../api/users";
 import { useMutation } from "react-query";
 import { User } from "../../custom";
@@ -15,8 +16,12 @@ const update = async (user: Partial<User>) => {
         }
     }
 };
-export const useUpdateUser = (userid: number | null | undefined) => {
+export const useUpdateUser = (
+    userid: number | null | undefined,
+    redirect?: boolean
+) => {
     const queryClient = useQueryClient();
+    const history = useHistory();
     return useMutation<
         User,
         { first_name?: string[]; last_name?: string[] },
@@ -27,6 +32,8 @@ export const useUpdateUser = (userid: number | null | undefined) => {
             if (userid) {
                 queryClient.invalidateQueries(`user_${userid}`);
                 queryClient.invalidateQueries("users");
+                console.log(redirect);
+                redirect && history.push("/");
             }
         },
     });

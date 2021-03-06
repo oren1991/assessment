@@ -2,6 +2,7 @@ import { createUser } from "./../api/users";
 import { useMutation } from "react-query";
 import { User } from "../../custom";
 import { useQueryClient } from "react-query";
+import { useHistory } from "react-router";
 
 const create = async (user: User) => {
     try {
@@ -15,14 +16,18 @@ const create = async (user: User) => {
         }
     }
 };
-export const useCreateUser = () => {
+export const useCreateUser = (redirect?: boolean) => {
     const queryClient = useQueryClient();
+    const history = useHistory();
     return useMutation<
         User,
         { first_name?: string[]; last_name?: string[] },
         any
     >((user: User) => create(user), {
         retry: false,
-        onSuccess: () => queryClient.invalidateQueries("users"),
+        onSuccess: () => {
+            queryClient.invalidateQueries("users");
+            redirect && history.push("/");
+        },
     });
 };

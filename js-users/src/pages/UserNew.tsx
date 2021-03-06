@@ -5,7 +5,7 @@ import { useCreateUser } from "../utils/hooks/useCreateUser";
 
 export const UserNew = () => {
     const user: User = { first_name: "", last_name: "" };
-    const createUser = useCreateUser();
+    const createUser = useCreateUser(true);
     return (
         <div
             style={{ display: "flex", justifyContent: "center" }}

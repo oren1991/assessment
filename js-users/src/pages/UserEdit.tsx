@@ -6,7 +6,7 @@ import { useUpdateUser } from "../utils/hooks/useUpdateUser";
 export const UserEdit = () => {
     const { userId } = useParams<{ userId: string }>();
     const { data: user } = useGetUser(userId);
-    const updateUser = useUpdateUser(user?.id);
+    const updateUser = useUpdateUser(user?.id, true);
     return (
         <div
             style={{ display: "flex", justifyContent: "center" }}
