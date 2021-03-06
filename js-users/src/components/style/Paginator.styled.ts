@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-export const PaginatorContainer = styled.div`
+export const PaginatorContainer = styled.div<{ isLoading?: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: center;
+    opacity: ${(props) => (props.isLoading ? "0.5" : "1")};
 `;
 
 export const PaginatorNavigator = styled.div`

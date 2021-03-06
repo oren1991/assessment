@@ -29,7 +29,7 @@ export const UserListItemInfo = styled.div`
     justify-content: space-around;
 `;
 
-export const UserListItemName = styled.div`
+export const UserListItemTitle = styled.div`
     flex-shrink: 1;
     font-size: 1.5em;
     font-weight: 700;
@@ -44,7 +44,7 @@ export const UserListItemDate = styled.div`
     color: #aaa;
 `;
 
-export const UserListItemLockButton = styled.button`
+export const UserListItemButton = styled.button`
     display: block;
     height: 50px;
     width: 50px;

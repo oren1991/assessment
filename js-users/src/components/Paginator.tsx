@@ -10,6 +10,7 @@ type Props<T> = {
     data: T[];
     basePage?: string | null;
     perPage: number;
+    isLoading?: boolean;
     onPageChange?: (page: number) => void;
     children: (props: T[]) => React.ReactNode;
 };
@@ -19,6 +20,7 @@ export const Paginator = <T,>({
     children,
     basePage,
     perPage,
+    isLoading,
     onPageChange,
 }: PropsWithChildren<Props<T>>) => {
     const startPage = basePage ? parseInt(basePage) : 1;
@@ -45,7 +47,7 @@ export const Paginator = <T,>({
     };
 
     return (
-        <PaginatorContainer>
+        <PaginatorContainer isLoading={isLoading}>
             {currentItems ? children(currentItems) : "empty"}
             <PaginatorNavigator>
                 {" "}

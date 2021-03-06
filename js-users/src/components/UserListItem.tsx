@@ -5,11 +5,12 @@ import {
     UserListItemContainer,
     UserListItemDate,
     UserListItemInfo,
-    UserListItemName,
-    UserListItemLockButton,
+    UserListItemTitle,
+    UserListItemButton,
 } from "./style/UserListItem.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faUserLock } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faUser, faUserLock } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router";
 
 type Props = {
     user: User;
@@ -17,6 +18,7 @@ type Props = {
 
 export const UserListItem: React.FC<Props> = ({ user }) => {
     const userMutation = useUpdateUser(user.id);
+    const history = useHistory();
     const toggleStatus: (user: User) => User = (user: User) => ({
         ...user,
         status: user.status === "active" ? "locked" : "active",
@@ -26,10 +28,10 @@ export const UserListItem: React.FC<Props> = ({ user }) => {
         <UserListItemContainer data-testid="user-list-item">
             <>
                 {userMutation.isLoading ? (
-                    "Updating user..."
+                    <UserListItemTitle>Updating user...</UserListItemTitle>
                 ) : (
                     <UserListItemInfo>
-                        <UserListItemName
+                        <UserListItemTitle
                             style={{
                                 textDecoration:
                                     user.status === "active"
@@ -38,30 +40,37 @@ export const UserListItem: React.FC<Props> = ({ user }) => {
                             }}
                         >
                             {`${user.first_name} ${user.last_name}`}
-                        </UserListItemName>
+                        </UserListItemTitle>
                         <UserListItemDate>
                             Created at:{" "}
                             {new Date(user.created_at!).toLocaleString("hu-HU")}
                         </UserListItemDate>
                     </UserListItemInfo>
                 )}
-                <UserListItemLockButton
-                    onClick={() => userMutation.mutate(toggleStatus(user))}
-                >
-                    {user.status === "locked" ? (
-                        <FontAwesomeIcon
-                            data-testid="user-icon"
-                            icon={faUser}
-                            size="lg"
-                        ></FontAwesomeIcon>
-                    ) : (
-                        <FontAwesomeIcon
-                            data-testid="lock-icon"
-                            icon={faUserLock}
-                            size="lg"
-                        ></FontAwesomeIcon>
-                    )}
-                </UserListItemLockButton>
+                <div>
+                    <UserListItemButton
+                        onClick={() => userMutation.mutate(toggleStatus(user))}
+                    >
+                        {user.status === "locked" ? (
+                            <FontAwesomeIcon
+                                data-testid="user-icon"
+                                icon={faUser}
+                                size="lg"
+                            ></FontAwesomeIcon>
+                        ) : (
+                            <FontAwesomeIcon
+                                data-testid="lock-icon"
+                                icon={faUserLock}
+                                size="lg"
+                            ></FontAwesomeIcon>
+                        )}
+                    </UserListItemButton>
+                    <UserListItemButton
+                        onClick={() => history.push(`/edit/${user.id}`)}
+                    >
+                        <FontAwesomeIcon icon={faEdit} size="lg" />
+                    </UserListItemButton>
+                </div>
             </>
         </UserListItemContainer>
     );

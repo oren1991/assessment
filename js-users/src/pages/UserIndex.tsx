@@ -6,7 +6,7 @@ import { User } from "../custom";
 import { useGetUsers } from "../utils/hooks/useGetUsers";
 export const UserIndex = () => {
     const history = useHistory();
-    const { data } = useGetUsers();
+    const { data, isFetching } = useGetUsers();
     const query = new URLSearchParams(useLocation().search);
 
     const handlePageChange = (page: number) => {
@@ -20,6 +20,7 @@ export const UserIndex = () => {
                 basePage={query.get("page")}
                 perPage={10}
                 onPageChange={handlePageChange}
+                isLoading={isFetching}
             >
                 {(users) => {
                     return users.map((user) => (
