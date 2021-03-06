@@ -21,7 +21,7 @@ export const useCreateUser = (redirect?: boolean) => {
     const history = useHistory();
     return useMutation<
         User,
-        { first_name?: string[]; last_name?: string[] },
+        { first_name?: string[]; last_name?: string[]; message?: string },
         any
     >((user: User) => create(user), {
         retry: false,

@@ -68,7 +68,11 @@ export const UserListItem: React.FC<Props> = ({ user }) => {
                     <UserListItemButton
                         onClick={() => history.push(`/edit/${user.id}`)}
                     >
-                        <FontAwesomeIcon icon={faEdit} size="lg" />
+                        <FontAwesomeIcon
+                            data-testid="user-edit"
+                            icon={faEdit}
+                            size="lg"
+                        />
                     </UserListItemButton>
                 </div>
             </>

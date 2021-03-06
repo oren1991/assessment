@@ -67,4 +67,24 @@ describe("useUpdateUser", () => {
             last_name: ["can't be blank"],
         });
     });
+
+    it("should return unexpected error when it's not a validation error", async () => {
+        const queryClient = new QueryClient();
+        const wrapper: React.FC = ({ children }) => (
+            <QueryClientProvider client={queryClient}>
+                {children}
+            </QueryClientProvider>
+        );
+        (axios as jest.Mocked<typeof axios>).put.mockReturnValueOnce(
+            Promise.reject(new Error())
+        );
+        const { result, waitFor } = renderHook(() => useUpdateUser(1), {
+            wrapper,
+        });
+
+        result.current.mutate({ first_name: "" });
+
+        await waitFor(() => result.current.isError);
+        expect(result.current.error!.message).toEqual("Unexpected Error");
+    });
 });

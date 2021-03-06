@@ -36,6 +36,7 @@ describe("<UserEdit />", () => {
     it("should not render the userform if there is NO user", async () => {
         (useGetUser as jest.Mock).mockImplementation(() => ({
             data: null,
+            isLoading: true,
         }));
         render(
             <QueryClientProvider client={queryClient}>

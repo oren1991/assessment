@@ -16,5 +16,5 @@ const get = () => async () => {
 };
 
 export const useGetUsers = () => {
-    return useQuery<User[] | null>("users", get());
+    return useQuery<User[] | null>("users", get(), { retry: false });
 };

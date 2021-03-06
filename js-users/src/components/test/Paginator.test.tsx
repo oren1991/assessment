@@ -2,18 +2,20 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { Paginator } from "../Paginator";
 
 const pageTrigger = jest.fn();
-beforeEach(() => {
-    render(
-        <Paginator<number>
-            onPageChange={pageTrigger}
-            perPage={5}
-            data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-        >
-            {(items) => items.map((item) => <div key={item}>{item}</div>)}
-        </Paginator>
-    );
-});
+
 describe("<Paginator />", () => {
+    beforeEach(() => {
+        render(
+            <Paginator<number>
+                onPageChange={pageTrigger}
+                perPage={5}
+                data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
+                basePage="ketto"
+            >
+                {(items) => items.map((item) => <div key={item}>{item}</div>)}
+            </Paginator>
+        );
+    });
     it("should render selected number of items", () => {
         const fifthItem = screen.queryByText("5");
         const sixthItem = screen.queryByText("6");
@@ -39,4 +41,21 @@ describe("<Paginator />", () => {
         fireEvent.click(prevButton);
         expect(pageTrigger).toBeCalledWith(1);
     });
+});
+
+it("should be at page one if basePage is not a number", () => {
+    render(
+        <Paginator<number>
+            onPageChange={pageTrigger}
+            perPage={5}
+            data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
+            basePage="ketto"
+        >
+            {(items) => items.map((item) => <div key={item}>{item}</div>)}
+        </Paginator>
+    );
+    const fifthItem = screen.queryByText("5");
+    const sixthItem = screen.queryByText("6");
+    expect(fifthItem).toBeInTheDocument();
+    expect(sixthItem).not.toBeInTheDocument();
 });

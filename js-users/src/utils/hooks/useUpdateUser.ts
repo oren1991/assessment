@@ -24,7 +24,7 @@ export const useUpdateUser = (
     const history = useHistory();
     return useMutation<
         User,
-        { first_name?: string[]; last_name?: string[] },
+        { first_name?: string[]; last_name?: string[]; message?: string },
         Partial<User>
     >((user: Partial<User>) => update(user), {
         retry: false,

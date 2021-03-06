@@ -48,7 +48,7 @@ export const Paginator = <T,>({
 
     return (
         <PaginatorContainer isLoading={isLoading}>
-            {currentItems ? children(currentItems) : "empty"}
+            {children(currentItems)}
             <PaginatorNavigator>
                 {" "}
                 <PaginatorButton

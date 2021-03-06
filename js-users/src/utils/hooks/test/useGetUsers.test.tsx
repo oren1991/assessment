@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react-hooks";
 import React from "react";
 import { QueryClientProvider } from "react-query";
 import { QueryClient } from "react-query";
-import { useGetUser } from "../useGetUser";
+import { useGetUsers } from "../useGetUsers";
 import axios from "axios";
 import { User } from "../../../custom";
 
@@ -15,11 +15,16 @@ describe("useGetUses", () => {
                 {children}
             </QueryClientProvider>
         );
-        const dummyUsers: User = { first_name: "dummy", last_name: "dummy" };
+        const dummyUsers: User[] = [
+            { first_name: "dummy3", last_name: "dummy" },
+            { first_name: "dummy1", last_name: "dummy" },
+            { first_name: "dummy4", last_name: "dummy" },
+            { first_name: "dummy4", last_name: "dummy" },
+        ];
         (axios as jest.Mocked<typeof axios>).get.mockReturnValueOnce(
             Promise.resolve({ data: dummyUsers })
         );
-        const { result, waitFor } = renderHook(() => useGetUser("1"), {
+        const { result, waitFor } = renderHook(() => useGetUsers(), {
             wrapper,
         });
 
@@ -37,7 +42,7 @@ describe("useGetUses", () => {
         (axios as jest.Mocked<typeof axios>).get.mockReturnValue(
             Promise.reject()
         );
-        const { result, waitFor } = renderHook(() => useGetUser("1"), {
+        const { result, waitFor } = renderHook(() => useGetUsers(), {
             wrapper,
         });
         await waitFor(() => {

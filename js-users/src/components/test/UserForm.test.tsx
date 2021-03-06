@@ -4,6 +4,7 @@ import { UserForm } from "../UserForm";
 describe("<UserForm>", () => {
     const mockedMutation = {
         error: {},
+        isLoading: false,
         mutate: jest.fn(),
     };
     beforeEach(() => {
@@ -67,7 +68,8 @@ describe("<UserForm>", () => {
 
 it("should render error when mutate has error object", async () => {
     const mockedMutation = {
-        error: { first_name: ["baj", "van"] },
+        error: { first_name: ["baj", "van"], last_name: ["ezzel", "is"] },
+        isLoading: false,
         mutate: jest.fn(),
     };
     render(
@@ -83,6 +85,27 @@ it("should render error when mutate has error object", async () => {
     fireEvent.click(submitButton);
 
     const firstName = await screen.findByText(/First name/);
-
+    const lastName = await screen.findByText(/Last name/);
     expect(firstName).toHaveTextContent("baj, van");
+    expect(lastName).toHaveTextContent("ezzel, is");
+});
+
+it("should render that it's upating when loading", async () => {
+    const mockedMutation = {
+        error: null,
+        isLoading: true,
+        mutate: jest.fn(),
+    };
+    render(
+        <UserForm
+            user={{
+                first_name: "this is a random name",
+                last_name: "this is a random last name",
+            }}
+            mutation={mockedMutation}
+        ></UserForm>
+    );
+
+    const updating = await screen.findByText(/Updating user/);
+    expect(updating).toBeInTheDocument();
 });
