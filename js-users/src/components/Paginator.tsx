@@ -1,4 +1,5 @@
 import React, { PropsWithChildren, useState } from "react";
+import styled from "styled-components";
 type Props<T> = {
     data: T[];
     basePage?: string | null;
@@ -6,7 +7,11 @@ type Props<T> = {
     onPageChange?: (page: number) => void;
     children: (props: T[]) => React.ReactNode;
 };
-
+const PaginatorContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
 export const Paginator = <T,>({
     data,
     children,
@@ -38,15 +43,15 @@ export const Paginator = <T,>({
     };
 
     return (
-        <div>
+        <PaginatorContainer>
             {currentItems ? children(currentItems) : "empty"}
             <button data-testid="prev-page" onClick={handlePrevPage}>
                 prev
             </button>
+            {page}
             <button data-testid="next-page" onClick={handleNextPage}>
                 next
             </button>
-            {page}
-        </div>
+        </PaginatorContainer>
     );
 };

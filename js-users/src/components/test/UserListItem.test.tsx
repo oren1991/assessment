@@ -27,8 +27,8 @@ describe("<UserListItem />", () => {
         );
     });
     it("should render props", async () => {
-        const firstName = await screen.findByText(/First name/);
-        const lastName = await screen.findByText(/Last name/);
+        const firstName = await screen.findByText(/this is a random first /);
+        const lastName = await screen.findByText(/this is a random last name/);
         const createdAt = await screen.findByText(/Created at/);
 
         expect(firstName).toBeInTheDocument();

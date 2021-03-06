@@ -1,4 +1,3 @@
-import "./App.css";
 import { UserIndex } from "./pages/UserIndex";
 import { UserNew } from "./pages/UserNew";
 import { UserEdit } from "./pages/UserEdit";
