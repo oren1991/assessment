@@ -27,7 +27,7 @@ export const useCreateUser = (redirect?: boolean) => {
         retry: false,
         onSuccess: () => {
             queryClient.invalidateQueries("users");
-            redirect && history.push("/");
+            redirect && history.goBack();
         },
     });
 };

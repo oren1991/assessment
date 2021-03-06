@@ -33,7 +33,7 @@ export const useUpdateUser = (
                 queryClient.invalidateQueries(`user_${userid}`);
                 queryClient.invalidateQueries("users");
                 console.log(redirect);
-                redirect && history.push("/");
+                redirect && history.goBack();
             }
         },
     });
