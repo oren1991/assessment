@@ -8,8 +8,8 @@ const create = async (user: User) => {
         const { data } = await createUser(user);
         return data;
     } catch (err) {
-        if (err.data) {
-            throw err.data;
+        if (err?.response?.data) {
+            throw err.response.data;
         } else {
             throw new Error("Unexpected Error");
         }
@@ -17,7 +17,11 @@ const create = async (user: User) => {
 };
 export const useCreateUser = () => {
     const queryClient = useQueryClient();
-    return useMutation<User, Error, any>((user: User) => create(user), {
+    return useMutation<
+        User,
+        { first_name?: string[]; last_name?: string[] },
+        any
+    >((user: User) => create(user), {
         retry: false,
         onSuccess: () => queryClient.invalidateQueries("users"),
     });

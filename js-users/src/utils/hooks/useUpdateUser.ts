@@ -8,25 +8,26 @@ const update = async (user: Partial<User>) => {
         const { data } = await updateUser(user);
         return data;
     } catch (err) {
-        if (err.data) {
-            throw err.data;
+        if (err?.response?.data) {
+            throw err.response.data;
         } else {
-            throw new Error("Unexpected error");
+            throw new Error("Unexpected Error");
         }
     }
 };
 export const useUpdateUser = (userid: number | null | undefined) => {
     const queryClient = useQueryClient();
-    return useMutation<User, Error, Partial<User>>(
-        (user: Partial<User>) => update(user),
-        {
-            retry: false,
-            onSuccess: () => {
-                if (userid) {
-                    queryClient.invalidateQueries(`user_${userid}`);
-                    queryClient.invalidateQueries("users");
-                }
-            },
-        }
-    );
+    return useMutation<
+        User,
+        { first_name?: string[]; last_name?: string[] },
+        Partial<User>
+    >((user: Partial<User>) => update(user), {
+        retry: false,
+        onSuccess: () => {
+            if (userid) {
+                queryClient.invalidateQueries(`user_${userid}`);
+                queryClient.invalidateQueries("users");
+            }
+        },
+    });
 };

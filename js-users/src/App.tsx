@@ -6,30 +6,50 @@ import {
     Switch,
     Route,
     Redirect,
+    Link,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import {
+    AppNavBar,
+    AppContainer,
+    AppBody,
+    AppNavLinks,
+    AppNavLink,
+} from "./style/App.styled";
 const client = new QueryClient();
 function App() {
     return (
         <QueryClientProvider client={client}>
-            <div className="App">
-                <Router>
-                    <Switch>
-                        <Route exact path="/">
-                            <UserIndex />
-                        </Route>
-                        <Route exact path="/new">
-                            <UserNew />
-                        </Route>
-                        <Route exact path="/edit/:userId">
-                            <UserEdit></UserEdit>
-                        </Route>
-                        <Route>
-                            <Redirect to="/" />
-                        </Route>
-                    </Switch>
-                </Router>
-            </div>
+            <Router>
+                <AppContainer>
+                    <AppNavBar>
+                        <AppNavLinks>
+                            <AppNavLink>
+                                <Link to="/">User List</Link>
+                            </AppNavLink>
+                            <AppNavLink>
+                                <Link to="/new">New User</Link>
+                            </AppNavLink>
+                        </AppNavLinks>
+                    </AppNavBar>
+                    <AppBody>
+                        <Switch>
+                            <Route exact path="/">
+                                <UserIndex />
+                            </Route>
+                            <Route exact path="/new">
+                                <UserNew />
+                            </Route>
+                            <Route exact path="/edit/:userId">
+                                <UserEdit></UserEdit>
+                            </Route>
+                            <Route>
+                                <Redirect to="/" />
+                            </Route>
+                        </Switch>
+                    </AppBody>
+                </AppContainer>
+            </Router>
         </QueryClientProvider>
     );
 }

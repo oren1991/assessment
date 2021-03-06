@@ -1,26 +1,26 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { UserForm } from "../UserForm";
 
-const mockedMutation = {
-    error: null,
-    mutate: jest.fn(),
-};
-beforeEach(() => {
-    render(
-        <UserForm
-            user={{
-                first_name: "this is a random name",
-                last_name: "this is a random last name",
-            }}
-            mutation={mockedMutation}
-        ></UserForm>
-    );
-});
 describe("<UserForm>", () => {
+    const mockedMutation = {
+        error: {},
+        mutate: jest.fn(),
+    };
+    beforeEach(() => {
+        render(
+            <UserForm
+                user={{
+                    first_name: "this is a random name",
+                    last_name: "this is a random last name",
+                }}
+                mutation={mockedMutation}
+            ></UserForm>
+        );
+    });
     it("should render", async () => {
-        const firstName = await screen.findByText(/First name:/);
-        const lastName = await screen.findByText(/Last name:/);
-        const submitButton = await screen.findByText(/Submit/);
+        const firstName = await screen.findByText(/First name/);
+        const lastName = await screen.findByText(/Last name/);
+        const submitButton = await screen.findByText(/Save/);
 
         expect(firstName).toBeInTheDocument();
         expect(lastName).toBeInTheDocument();
@@ -40,7 +40,7 @@ describe("<UserForm>", () => {
     });
 
     it("should trigger mutation when clicked submit", async () => {
-        const submitButton = await screen.findByText(/Submit/);
+        const submitButton = await screen.findByText(/Save/);
         await fireEvent.click(submitButton);
         expect(mockedMutation.mutate).toBeCalled();
     });
@@ -63,4 +63,26 @@ describe("<UserForm>", () => {
             target: { value: "random last name" },
         });
     });
+});
+
+it("should render error when mutate has error object", async () => {
+    const mockedMutation = {
+        error: { first_name: ["baj", "van"] },
+        mutate: jest.fn(),
+    };
+    render(
+        <UserForm
+            user={{
+                first_name: "this is a random name",
+                last_name: "this is a random last name",
+            }}
+            mutation={mockedMutation}
+        ></UserForm>
+    );
+    const submitButton = await screen.findByText(/Save/);
+    fireEvent.click(submitButton);
+
+    const firstName = await screen.findByText(/First name/);
+
+    expect(firstName).toHaveTextContent("baj, van");
 });

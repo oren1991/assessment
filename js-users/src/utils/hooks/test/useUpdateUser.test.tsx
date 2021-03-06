@@ -36,9 +36,11 @@ describe("useUpdateUser", () => {
         );
         (axios as jest.Mocked<typeof axios>).put.mockReturnValueOnce(
             Promise.reject({
-                data: {
-                    first_name: ["can't be blank"],
-                    last_name: ["can't be blank"],
+                response: {
+                    data: {
+                        first_name: ["can't be blank"],
+                        last_name: ["can't be blank"],
+                    },
                 },
             })
         );

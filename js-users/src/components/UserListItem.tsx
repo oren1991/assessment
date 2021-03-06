@@ -7,7 +7,7 @@ import {
     UserListItemInfo,
     UserListItemName,
     UserListItemLockButton,
-} from "./UserListItem.styled";
+} from "./style/UserListItem.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faUserLock } from "@fortawesome/free-solid-svg-icons";
 

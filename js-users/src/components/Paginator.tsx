@@ -1,7 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import React, { PropsWithChildren, useState } from "react";
-import styled from "styled-components";
+import {
+    PaginatorButton,
+    PaginatorContainer,
+    PaginatorNavigator,
+} from "./style/Paginator.styled";
 type Props<T> = {
     data: T[];
     basePage?: string | null;
@@ -9,34 +13,6 @@ type Props<T> = {
     onPageChange?: (page: number) => void;
     children: (props: T[]) => React.ReactNode;
 };
-const PaginatorContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
-
-const PaginatorNavigator = styled.div`
-    height: 100px;
-    width: 400px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    @media (max-width: 450px) {
-        width: 80%;
-    }
-`;
-
-const PaginatorButton = styled.button`
-    display: block;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    :hover {
-        background-color: white;
-        cursor: pointer;
-    }
-`;
 
 export const Paginator = <T,>({
     data,
