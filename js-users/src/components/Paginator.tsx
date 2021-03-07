@@ -54,7 +54,9 @@ export const Paginator = <T,>({
 
     return (
         <PaginatorContainer isLoading={isLoading}>
-            {children(currentItems)}
+            {isLoading && data.length === 0
+                ? "Loading data..."
+                : children(currentItems)}
             <PaginatorNavigator>
                 <PaginatorButton
                     data-testid="prev-page"
