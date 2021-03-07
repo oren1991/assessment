@@ -33,7 +33,10 @@ export const Paginator = <T,>({
     const handleNextPage = (
         event: React.MouseEvent<Element, MouseEvent>
     ): void => {
-        const newPage = Math.min(page + 1, Math.ceil(data.length / perPage));
+        const newPage = Math.max(
+            Math.min(page + 1, Math.ceil(data.length / perPage)),
+            1
+        );
         setPage(newPage);
         onPageChange && onPageChange(newPage);
     };
@@ -41,7 +44,10 @@ export const Paginator = <T,>({
     const handlePrevPage = (
         event: React.MouseEvent<Element, MouseEvent>
     ): void => {
-        const newPage = Math.max(page - 1, 1);
+        const newPage = Math.max(
+            Math.min(page - 1, Math.ceil(data.length / perPage)),
+            1
+        );
         setPage(newPage);
         onPageChange && onPageChange(newPage);
     };
