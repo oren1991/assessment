@@ -50,7 +50,6 @@ export const Paginator = <T,>({
         <PaginatorContainer isLoading={isLoading}>
             {children(currentItems)}
             <PaginatorNavigator>
-                {" "}
                 <PaginatorButton
                     data-testid="prev-page"
                     onClick={handlePrevPage}
