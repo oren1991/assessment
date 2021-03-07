@@ -19,6 +19,7 @@ export const UserFormForm = styled.form`
     color: #555;
     @media (max-width: 450px) {
         width: 80%;
+        min-width: 80%;
     }
 `;
 
@@ -43,6 +44,9 @@ export const UserFormInput = styled.input<{ invalid?: boolean }>`
     ${(props) => (props.invalid ? "border: 2px solid red;" : "")}
     color: black;
     padding: 5px;
+    @media (max-width: 450px) {
+        width: 80%;
+    }
 `;
 
 export const UserFormSaveButton = styled.button`
